@@ -1,0 +1,44 @@
+V8 ancillary verification results
+
+Source files checked:
+  main.tex       2988276d831c7b5497be5bf6bc4da84189c0a0879ec20925496d72ad338c32c4
+  body.tex       e2822733827beb0d19e77b3721596c8219152a21ad7619a5e189a6eaafbd07d5
+  appendices.tex 197cd887eb3d597df8dc97569b6bbc658e44f436a6ec6edcbe74eb5ae361032f
+
+Environment: Python 3.12.3; python-flint 0.9.0.
+
+Checks:
+
+1. Energy tables and directed certificate
+   Result: reference density integers PASS; both tables have 256 entries;
+   mass, cap, tail and directed intervals PASS.
+   a=67 lower [6.2732861583045446758 +/- 2.16e-20]
+   a=67 upper [6.2733351903561357608 +/- 3.57e-20]
+   a=70 lower [6.3100053850648586710 +/- 2.56e-20]
+   a=70 upper [6.3100585701803409215 +/- 6.02e-21]
+   Runtime: 309.32 s.
+
+2. Seed identity; seed table and residues
+   Result: reference seed record PASS; degree 22, all 23 coefficients and
+   all residues modulo 13 PASS.
+   Runtime: 0.08 s.
+
+3. Arithmetic rates
+   Result: tau(67) < 6272107/1000000 PASS;
+   tau(-70) < 6307708/1000000 PASS. Comparisons use exact Fractions.
+   Runtime: 0.03 s.
+
+4. Pole finite parts (diagnostic)
+   Result: ALL_PASS total=6528.
+   Runtime: 6.64 s.
+
+5. Prime-power tower (diagnostic)
+   Result: 456976 checked entries for each of a=67 and a=-70; all_pass=true.
+   This checks the listed rational-pole and coefficient parts only.
+   Runtime: 5.35 s.
+
+The energy table parser accepts the six-column main table and twelve-column
+tail table, strips TeX thin-space digit grouping, and fills omitted tail
+indices with zero. The seed parser reads the labeled tabular block and
+normalizes TeX grouping and math-mode signs. The parsed v8 data agree entry by
+entry with the reference machine-readable density and seed records.

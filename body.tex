@@ -1,0 +1,1043 @@
+\section{Determinant construction}\label{sec:determinant}
+
+Fix an integer \(a\) with \(|a| \ge 2\). Let \(m\) be a positive multiple of \(4\). Put \(g=m/2\), \(I=\{0,\ldots,m-1\}\), and \(J=\{m,\ldots,2m-1\}\). Define
+\[
+ w(r)=\binom{r-1}{g}^{3},\qquad
+ F_{ij}(r)=\frac{w(r)}{(r+i)(r+j)},\qquad K_{ij}(r)=F_{ij}''(r),
+\]
+and
+\[
+ M_{ij}(a)=\sum_{r\geq1}a^{-r}K_{ij}(r),\qquad i\in I, j\in J.
+\]
+Polynomial division at the two poles gives a polynomial \(P_{ij}\) with
+\[
+ F_{ij}=P_{ij}+\frac{c_i}{r+i}+\frac{c_j}{r+j},\quad
+ c_i=\frac{w(-i)}{j-i},\quad c_j=-\frac{w(-j)}{j-i}.
+\]
+The residues \(c_i\) and \(c_j\) depend on the pair \((i,j)\); we suppress the second index. Put \(b=a-1\). The letter \(b\) has this meaning throughout. For every integer \(a\) with \(|a|\ge2\) and every \(m\) with \(4\mid m\), define
+\[
+ \begin{aligned}
+ E_{ij}(a)&=\sum_{r\ge1}a^{-r}P_{ij}''(r)
+ -2c_i a^i\sum_{n=1}^{i}\frac{a^{-n}}{n^3}
+ -2c_j a^j\sum_{n=1}^{j}\frac{a^{-n}}{n^3},\\
+ C_{ij}(a)&=2c_i a^i+2c_j a^j.
+ \end{aligned}
+\]
+Empty finite sums are zero. For \(n\ge0\) put \(\mathsf h_3(n)=\sum_{s=1}^n a^{-s}s^{-3}\). The finite sums in \(E_{ij}\) are \(\mathsf h_3(i)\) and \(\mathsf h_3(j)\).
+
+\begin{lemma}\label{lem:decomposition}
+For every integer \(a\) with \(|a|\ge2\) and every \(m\) with \(4\mid m\), the matrices \(E(a)\) and \(C(a)\) satisfy
+\[
+ M(a)=E(a)+\operatorname {Li}_3(1/a)C(a),\qquad
+ G_{m,a}(T)=\det(E(a)+TC(a)).
+\]
+Here the second formula defines \(G_{m,a}\). Its degree is at most \(m\).
+\end{lemma}
+
+\begin{proof}
+Differentiating the partial fractions gives
+\[
+ F_{ij}''=P_{ij}''+2c_i(r+i)^{-3}+2c_j(r+j)^{-3}.
+\]
+Also \(\sum_{r\ge1}a^{-r}(r+i)^{-3} =a^i(\operatorname{Li}_3(1/a)-\sum_{n=1}^i a^{-n}n^{-3})\). Since \(|a|>1\), the geometric series and all differentiated polynomial-weighted series converge absolutely. So the decomposition holds for positive and negative integers \(a\) in the stated domain. The entries of \(E(a)+TC(a)\) are linear in \(T\). Hence \(G_{m,a}\) has degree at most \(m\). This proves Lemma~\ref{lem:decomposition}.
+\end{proof}
+
+\section{Determinant criterion}\label{sec:criterion}
+
+Fact~\ref{fact:criterion} is the determinant criterion of~\cite[Section~3]{Zh}.
+Sections~\ref{sec:integerization}--\ref{sec:rays} check its $\operatorname{Li}_3$-specific hypotheses.
+
+\begin{fact}[Determinant criterion]\label{fact:criterion}
+Let $\theta$ be a fixed real number. For a fixed base $a$, let $G_{m,a}(T)$
+have degree at most $m$. Let $m_k$ be a strictly increasing sequence. Suppose
+there are positive rationals $\Delta_m(a)$ with
+\[
+\Delta_m(a)G_{m,a}(T)\in\mathbb Z[T],\qquad
+\limsup_{k\to\infty} m_k^{-2}\log\Delta_{m_k}(a)\le\tau(a),
+\]
+\[
+\log|G_{m_k,a}(\theta)|\le-\alpha(a)m_k^2+O(m_k\log m_k),
+\qquad \alpha(a)>\tau(a),
+\]
+Suppose also that each fixed rational $\xi$ has a $k_0(a,\xi)$ with
+$G_{m_k,a}(\xi)\ne0$ for $k\ge k_0(a,\xi)$.
+Then $\theta$ is irrational.
+\end{fact}
+
+\begin{proof}
+Suppose $\theta=u/v$ in lowest terms. For $k\ge k_0(a,u/v)$ and $m=m_k$, put
+\[
+ Z_m=v^m\Delta_m(a)G_{m,a}(u/v).
+\]
+Since the degree is at most $m$, the factor $v^m$ clears the denominator.
+Hence $Z_m$ is a nonzero integer. The factor $|v|^{m_k}=e^{O(m_k)}$ is absorbed in the error term. By the two displayed bounds, $|Z_m|\to0$.
+This is a contradiction.
+\end{proof}
+
+\section{Coefficient integerization}\label{sec:integerization}
+
+Let \(U=2m-1\), \(L=\operatorname{lcm}(1,\ldots,U)\), \(N=m^2/8-m/2\), \(H_m=(3m/4-1)^2\), and \(H=3g-3\). For each prime \(p\), let \(d_p=v_p(L)\). For an integer \(n\ge0\), put \(\kappa_n=1\) if \(n\bmod p\ge p-(g\bmod p)\), and \(\kappa_n=0\) otherwise. The flag depends on \(p\); we suppress this. For \(p>g\) the condition reads \(n\bmod p\ge p-g\). Define the prime weights \(W_m(p)\) by the first case that applies:
+
+\begin{enumerate}
+\item
+\(W_m(p)=0\) for \(p>U\);
+\item
+\(W_m(p)=4m d_p\) for \(p<5\) or \(p^2 \le U+g\);
+\item
+for \(p\ge5\), \(p^2>U+g\), \(p\le{}g\), use \(W_m(p)=4m-\sum_{n=0}^U \kappa_n\);
+\item
+for \(g<p<m\), put \(u=p-g\). An index is active if it is at least \(p\) and has \(\kappa=0\). It is killed if \(\kappa=1\). A row below \(p\) with \(\kappa=0\) is a low row. Every column with \(\kappa=0\) is active. Let \(N_{\rm act}\) be the total number of active rows and active columns, and set
+\[
+\begin{aligned}
+  c_I(z)&=\#\{i\in I:i\equiv z\pmod p\},&
+  c_J(z)&=\#\{j\in J:j\equiv z\pmod p\},\\
+  \Sigma_K&=\sum_{z=p-g}^{p-1}\min(c_I(z),c_J(z)).
+\end{aligned}
+\]
+Use
+\[
+  W_m(p)=\min\{3N_{\rm act}+u+\Sigma_K,\ m+2N_{\rm act}+u\}.
+\]
+\item
+for \(m\le{}p\le{}U\), use \(W_m(p)=4(2m-p)-3 \max(0,2m+g-2p)\).
+\end{enumerate}
+
+Cases (3)--(5) are the moving-prime branches. They treat the primes \(p\le U\) with \(p\ge5\) and \(p^2>U+g\).
+
+\subsection{Entrywise bounds}
+
+\begin{lemma}\label{lem:newton}
+For \(i\in I\) and \(j\in J\), the complete Newton expansion of \(P''_{ij}\) is
+\[
+ P''_{ij}(r)=\sum_{\iota=0}^{3g-4}\gamma_{ij,\iota}\binom{r-1}{\iota},
+ \qquad L^4\gamma_{ij,\iota}\in{\mathbb Z}.
+\]
+\end{lemma}
+
+\begin{proof}
+For an integer-valued polynomial \(f\) of degree at most \(d\), the Newton expansion at an integer \(z\) is
+\[
+ f(z+y)=\sum_{\iota=0}^d\Delta^\iota f(z)\binom y\iota .
+\]
+By the identity \(\binom y\iota/y=\binom{y-1}{\iota-1}/\iota\), the polynomial \(\operatorname {lcm}(1,\ldots,d)(f(x)-f(z))/(x-z)\) is integer-valued, including its removable value. Since \(\Delta\) is nilpotent on polynomials of degree at most \(d\), \(\partial=\log(1+\Delta)\) is a finite sum. Hence \(\operatorname{lcm}(1,\ldots,d)f'\) is integer-valued. The polynomial quotient \(P\) is exactly two divided differences of \(w\). Apply each of these two bounds twice. The two divided-difference steps and the two derivative steps each cost one factor \(\operatorname{lcm}(1,\ldots,d)\), with \(d\le\deg w=3g\). So \(L^4P''\) is integer-valued. Since \(3g\le U\), each such factor divides \(L\). This gives the polynomial part at every prime power. This proves Lemma~\ref{lem:newton}.
+\end{proof}
+
+\begin{lemma}\label{lem:one-carry}
+Let \(p\ge5\) be a prime with \(p^2>U+g\) and \(p\le g\), and let \(\kappa_n\) be the carry flag defined above. Let \(i\in I\), \(j\in J\), and \(\delta=j-i\). For every integer \(n\) with \(0\le n\le3g-4\), including the removable poles \(n=i\) and, when \(j\le3g-4\), \(n=j\),
+\[
+ v_p(P_{ij}''(-n))\ge -B_{ij},\qquad
+ B_{ij}=3-\kappa_i\kappa_j+(1-\kappa_i)1_{i\equiv j\,(p)}.
+\]
+Here and below, the subscript \((p)\) means modulo \(p\). The potentials \(\phi_n=2-\kappa_n\), \(n\in I\cup J\), satisfy \(\phi_i+\phi_j\ge B_{ij}\), including the equal-residue case.
+\end{lemma}
+
+\begin{proof}
+Since \(p^2>U+g\), the factorial valuation has at most one carry. Legendre's formula gives \(v_p\binom{n+g}{g}=\kappa_n\). Deleting at most \(\ell\) factors from the triple product gives
+\[
+ v_p(w^{(\ell)}(-n))\ge3\kappa_n-\ell,\qquad 0\le\ell\le3.
+\]
+Let \(n\notin\{i,j\}\), and put \(d_i=i-n\), \(d_j=j-n\). Since \(0<|d_i|,|d_j|<4g<p^2\), we have \(v_p(d_i)=\varepsilon_i\) and \(v_p(d_j)=\varepsilon_j\), where \(\varepsilon_i=1_{n\equiv i\,(p)}\) and \(\varepsilon_j=1_{n\equiv j\,(p)}\). At \(r=-n\), direct differentiation gives
+\[
+ F_{ij}''=\frac{w''}{d_i d_j}
+ -2w'\left(\frac1{d_i^2d_j}+\frac1{d_i d_j^2}\right)
+ +2w\left(\frac1{d_i^3d_j}+\frac1{d_i^2d_j^2}+\frac1{d_i d_j^3}\right),
+\]
+and \(P''_{ij}(-n)=F''_{ij}(-n)-2c_i/d_i^3-2c_j/d_j^3\). Each of the six terms of \(F''_{ij}\) is \(w^{(\ell)}(-n)/(d_i^{e_1}d_j^{e_2})\) with \(\ell+e_1+e_2=4\) and \(e_1,e_2\ge1\). Its valuation is at least \(3\kappa_n-\ell-e_1\varepsilon_i-e_2\varepsilon_j\). Since \(v_p(c_i)\ge3\kappa_i-v_p(\delta)\) and \(v_p(c_j)\ge3\kappa_j-v_p(\delta)\), the two pole terms have valuations at least \(3\kappa_i-v_p(\delta)-3\varepsilon_i\) and \(3\kappa_j-v_p(\delta)-3\varepsilon_j\). There are four cases.
+\begin{enumerate}
+\item If \(\varepsilon_i=\varepsilon_j=0\), every term is at least \(-2\ge-B_{ij}\).
+\item If \(\varepsilon_i=1\) and \(\varepsilon_j=0\), then \(i\not\equiv j\), \(v_p(\delta)=0\) and \(\kappa_n=\kappa_i\). Since \(e_2\ge1\), every term is at least \(3\kappa_i-3\ge-(3-\kappa_i\kappa_j)=-B_{ij}\).
+\item The case \(\varepsilon_i=0\), \(\varepsilon_j=1\) is symmetric, with bound \(3\kappa_j-3\ge-B_{ij}\).
+\item If \(\varepsilon_i=\varepsilon_j=1\), then \(n\equiv i\equiv j\), \(v_p(\delta)=1\), and the three carry flags equal a common \(\kappa\). Every term is at least \(3\kappa-4\). This is \(-4=-B_{ij}\) if \(\kappa=0\), and \(-1\ge-2=-B_{ij}\) if \(\kappa=1\).
+\end{enumerate}
+So \(v_p(P''_{ij}(-n))\ge-B_{ij}\) at every \(n\notin\{i,j\}\). At \(n=i\), Taylor expansion at \(r=-i\) gives the corrected finite part
+\[
+ P''_{ij}(-i)=\frac{w'''(-i)}{3\delta}-\frac{w''(-i)}{\delta^2}
+ +\frac{2w'(-i)}{\delta^3}+\frac{2(w(-j)-w(-i))}{\delta^4}.
+\]
+At \(n=j\) the symmetric formula is
+\[
+ P''_{ij}(-j)=-\frac{w'''(-j)}{3\delta}-\frac{w''(-j)}{\delta^2}
+ -\frac{2w'(-j)}{\delta^3}+\frac{2(w(-i)-w(-j))}{\delta^4}.
+\]
+Put \(\varepsilon=v_p(\delta)\). In this branch \(\varepsilon\le1\). The four terms of the formula at \(n=i\) have lower bounds \(3\kappa_i-3-\varepsilon,\ 3\kappa_i-2-2\varepsilon,\ 3\kappa_i-1-3\varepsilon,\ 3\min(\kappa_i,\kappa_j)-4\varepsilon\). If \(\varepsilon=0\), the last term is integral and the first three give the claimed bound. If \(\varepsilon=1\), then \(i\equiv j\pmod p\), so the two carry flags agree. If their common value is 0, every term is at least \(-4\). If it is 1, every term is at least \(-1\ge-B_{ij}\). Thus \(v_p(P''_{ij}(-n))\ge-B_{ij}\), including the equal-residue case. The same calculation with \(\delta\) replaced by \(-\delta\) applies at \(n=j\). Finally \(\phi_i+\phi_j-B_{ij}=(1-\kappa_i)(1-\kappa_j)\ge0\) if \(i\not\equiv j\), and \(\phi_i+\phi_j-B_{ij}=\kappa_i^2-\kappa_i=0\) if \(i\equiv j\). This proves Lemma~\ref{lem:one-carry}.
+\end{proof}
+
+\begin{lemma}\label{lem:grid-transfer}
+Let \(p\) be a prime and \(L'\) an integer. Put \(d=3g-4\), and suppose a degree-at-most-\(d\) polynomial \(f\) satisfies \(v_p(f(-n))\ge L'\) for \(0\le n\le d\). Then every coefficient \(\gamma_\iota\) of \(f\) in the basis \(\binom{x-1}{\iota}\) has valuation at least \(L'\).
+\end{lemma}
+
+\begin{proof}
+The Newton coefficients of \(f\) at \(-d\) are
+\[
+ \alpha_s=\sum_{e=0}^s(-1)^{s-e}\binom se f(-d+e),\qquad
+ f(x)=\sum_{s=0}^d\alpha_s\binom{x+d}{s}.
+\]
+They all have valuation at least \(L'\). Changing to the basis at 1 gives
+\[
+ f(x)=\sum_{\iota=0}^d\gamma_\iota\binom{x-1}{\iota},\qquad
+ \gamma_\iota=\sum_{s=\iota}^d\alpha_s\binom{d+1}{s-\iota}.
+\]
+These binomial coefficients are integers. So every \(\gamma_\iota\) also has valuation at least \(L'\). This proves Lemma~\ref{lem:grid-transfer}.
+\end{proof}
+
+\begin{lemma}\label{lem:poly-part}
+Let \(p\) be a prime, \(i\in I\) and \(j\in J\), and let \(\gamma_{ij,\iota}\) be the Newton coefficients of Lemma~\ref{lem:newton}. If \(p\ge5\), \(p^2>U+g\) and \(p\le g\), then \(v_p(\gamma_{ij,\iota})\ge-\phi_i-\phi_j\) for every \(\iota\). If \(p>g\), every \(\gamma_{ij,\iota}\) is \(p\)-integral.
+\end{lemma}
+
+\begin{proof}
+For \(p\le g\), apply Lemma~\ref{lem:grid-transfer} to \(f=P''_{ij}\) with \(L'=-\phi_i-\phi_j\). Its samples are the points \(-n\), \(0\le n\le d\), of Lemma~\ref{lem:one-carry}, including the removable poles among them. There \(v_p\ge-B_{ij}\ge-\phi_i-\phi_j\). For \(p>g\), the coefficients of \(w(r)=\binom{r-1}{g}^3\) have denominators dividing \((g!)^3\), so they are \(p\)-integral. Division by the monic factor \((r+i)(r+j)\) keeps the quotient \(P_{ij}\) \(p\)-integral. So \(P''_{ij}\) is \(p\)-integral at every integer, and so is \(\gamma_{ij,\iota}=(\Delta^\iota P''_{ij})(1)\). This proves Lemma~\ref{lem:poly-part}.
+\end{proof}
+
+A potential is a function \(\pi\ge0\) on \(I\cup J\). It covers a demand \(D\) if \(\pi_i+\pi_j\ge D_{ij}\) for all \(i\in I\), \(j\in J\). Its total is \(\sum_{n\in I\cup J}\pi_n\). For \(p^2>U+g\), \(i\in I\) and \(j\in J\), put \(\varepsilon=1_{i\equiv j\,(p)}\) and
+\begin{equation}\label{eq:demand}
+ D_{ij}=\max\{0,\ 3\cdot1_{i\ge p}-3\kappa_i+\varepsilon,\
+                    3\cdot1_{j\ge p}-3\kappa_j+\varepsilon\}.
+\end{equation}
+Lemma~\ref{lem:harmonic} shows that \(D_{ij}\) bounds the \(p\)-adic denominators of the harmonic corrections and of \(C\).
+
+\begin{lemma}\label{lem:moving}
+Let \(g<p\le U\) with \(p^2>U+g\). Use \(N_{\rm act}\), \(u\) and the active, low and killed indices of the definition of \(W_m(p)\). Let \(D_{ij}\) be the demand \eqref{eq:demand}. For \(g<p<m\), exact interval counting gives
+\[
+ N_{\rm act}=\sum_{t=1}^{3}\max(0,\min(u,2m-tp)),\qquad
+ \Sigma_K=g+(5m/2-4p)_+ .
+\]
+Potential (I) assigns 3 to active rows and columns, 1 to each low row, and 0 to killed indices. It then assigns one additional unit to every copy on the smaller side of each killed residue; rows are chosen on a tie. Potential (II) assigns row weights 2, 1, 0 on active, low, killed rows, respectively, and column weights 3, 1 on active and killed columns. Both potentials cover \(D\), and their totals are the two quantities in the definition of \(W_m(p)\).
+
+For \(m\le{}p\le{}U\), the row weight \(1_{i<2m-p}\) and the column weight \(3\cdot1_{j\ge p,\kappa_j=0}\) cover \(D\), with total \(W_m(p)\).
+\end{lemma}
+
+\begin{proof}
+Potential (I) has costs 3 on active rows and columns, 1 on low rows, and one extra cost on the smaller side of each killed residue. Hence \(W_{\rm I}=3N_{\rm act}+u+\Sigma_K\). Potential (II) has row costs 2,1,0 on active, low, killed rows and column costs 3,1 on active, killed columns. Hence \(W_{\rm II}=m+2N_{\rm act}+u\).
+
+Active-active edges demand at most 4 and receive at least 5. Active-killed edges demand 3, because equal residues cannot have different carry flags. Low-active edges demand at most 4. Low-killed edges demand 0. Killed-killed edges demand \(\varepsilon\). They are covered by the selected smaller side in (I) and by the killed-column unit in (II). Hence both totals are feasible for every residue configuration, including endpoints. So \(\min(W_{\rm I},W_{\rm II})\) is valid coefficientwise.
+
+Now let \(m\le p\le U\). An active column demands \(3+\varepsilon\). If \(\varepsilon=1\), then \(j=i+p\) and the row weight supplies the fourth unit. Every other edge demands at most \(\varepsilon\). The row weight covers it when \(\varepsilon=1\). Thus row cost \(1_{i<2m-p}\) and column cost \(3\cdot1_{j\ge p,\kappa_j=0}\) cover every edge. The column count is \(2m-p-\max(0,2m+g-2p)\), giving the stated total. This proves Lemma~\ref{lem:moving}.
+\end{proof}
+
+\begin{lemma}\label{lem:harmonic}
+Let \(p\) be a prime, \(i\in I\) and \(j\in J\). Consider the finite harmonic corrections in \(E_{ij}\) and the entry \(C_{ij}\). In case (2) of the definition of \(W_m(p)\), each of their coefficients has \(p\)-adic valuation at least \(-4d_p\). In case (3) it is at least \(-B_{ij}\), with \(B_{ij}\) as in Lemma~\ref{lem:one-carry}. In cases (4) and (5) it is at least \(-D_{ij}\), with \(D_{ij}\) as in \eqref{eq:demand}, and Lemma~\ref{lem:moving} applies to this demand. For \(p>U\) these coefficients are \(p\)-integral. In each case the weight \(W_m(p)\) covers the demand.
+\end{lemma}
+
+\begin{proof}
+With \(\mathsf h_3\) as in Section~\ref{sec:determinant},
+\[
+ a^n\mathsf h_3(n)=\sum_{s=1}^n\frac{a^{n-s}}{s^3},\qquad n\in\{i,j\}.
+\]
+The integer \(w(-n)=(-1)^{3g}\binom{n+g}{g}^3\) has valuation \(3 \kappa_n\) in the one-carry branches. Also \(v_p(j-i)=\varepsilon\) is at most one. Thus \(v_p(c_n)\ge3 \kappa_n-\varepsilon\). Since \(n\le{}U<p^2\), each coefficient of \(a^n\mathsf h_3(n)\) has valuation at least \(-3\cdot1_{n\ge{}p}\). So the entry demand is bounded by \(D_{ij}\) of \eqref{eq:demand}. The coefficients of \(C\) have no harmonic denominator and satisfy this bound as well.
+
+Let \(p\le{}g\). Then \(D_{ij}\le{}B_{ij}\). When \(\varepsilon=1\), the residues and carry flags agree. The worst case \(\kappa_i=\kappa_j=0\) is bounded by the extra equal-residue unit in \(B_{ij}\). When \(\varepsilon=0\), \(D_{ij}\le3\). If both carry flags are one, then \(D_{ij}=0\le{}B_{ij}\).
+
+For \(g<p<m\) and \(m\le{}p\le{}U\), this is the edge demand covered in Lemma~\ref{lem:moving}. If \(p^2\le{}U+g\), each harmonic coefficient costs at most \(3d_p\) from \(s^3\) and at most \(d_p\) from \(j-i\). The coarse weight \(4m d_p\) covers every determinant term. Primes \(p>U\) divide none of these denominators. This proves Lemma~\ref{lem:harmonic}.
+\end{proof}
+
+\subsection{Formal divisors}\label{subsec:coefficientwise}
+
+In Lemmas~\ref{lem:a-divisor} and~\ref{lem:b-divisor}, \(\mathsf a\) is an indeterminate and \(\mathsf b=\mathsf a-1\). Put
+\[
+ \mathcal Q_m(\mathsf a,T)=L^{4m}\mathsf b^{\,mH}G_{m,\mathsf a}(T).
+\]
+By Lemma~\ref{lem:newton}, \(\sum_{r\ge1}\mathsf a^{-r}\binom{r-1}{\iota}=\mathsf b^{-\iota-1}\) and \(\iota+1\le H\). The harmonic corrections and the entries of \(C\) are polynomials in \(\mathsf a\) with denominators dividing \(L^4\). So every entry of \(L^4\mathsf b^H(E+TC)\) lies in \(\mathbb Z[\mathsf a,T]\), and \(\mathcal Q_m\in\mathbb Z[\mathsf a,T]\).
+
+\begin{lemma}\label{lem:a-divisor}
+Let \(\mathcal Q_m\) be as above. Every nonzero coefficient of the determinant has total \(a\)-order at least
+\[
+ \sum_{j=0}^{m-1}\lfloor j/4\rfloor
+ =\frac{m^2}8-\frac m2=N.
+\]
+Hence \(\mathsf a^N\) divides \(\mathcal Q_m\) in \(\mathbb Z[\mathsf a,T]\).
+\end{lemma}
+
+\begin{proof}
+For a polynomial \(P\) in the polynomial part, the rational continuation of \(\sum_{r\ge1} a^{-r} P(r)\) has the formal expansion \(-\sum_{s\ge0} a^s P(-s)\) at \(a=0\). This identity is used only for polynomial parts. The cubic-pole corrections are handled by their finite harmonic sums and by the following exceptional-row decomposition.
+
+Put \(\varrho(a)=\sum_{s\ge1}a^s/s^3\) and consider \(E+(X+\varrho(a))C\) in \({\mathbb Q}[X][[a]]\). For \(k\notin I\cup J\), the coefficient matrix of \(a^k\) is a sum of three outer products in the row features \((i-k)^{-1},(i-k)^{-2},(i-k)^{-3}\). For \(k\in I\), use the four row features \((v_i,v_i^2,v_i^3,[i=k])\) and four column features \((v_j,v_j^2,v_j^3,v_j^4)\), where \(v_i=(i-k)^{-1}\), \(v_k=0\), and \(v_j=(j-k)^{-1}\). Write \(w_1,w_2,w_3\) for \(w',w'',w'''\) at \(-k\), and put \(\delta'=j-k\). The middle matrix is
+\[
+\begin{pmatrix}
+-w_2&2w_1&-2\varpi_k&0\\
+2w_1&-2\varpi_k&0&0\\
+-2\varpi_k&0&0&0\\
+-w_3/3+2X\varpi_k&w_2&-2w_1&2\varpi_k
+\end{pmatrix},
+\qquad \varpi_k:=w(-k).
+\]
+The fourth row comes from expanding at the removable pole. Explicitly, the coefficient used in the formal rank calculation is
+\[
+ [a^k](E+(X+\varrho(a))C)_{kj}
+=-w_3/(3\delta')+w_2/\delta'^2-2w_1/\delta'^3
+  +2\varpi_k/\delta'^4+2X\varpi_k/\delta' .
+\]
+The case \(k\in J\) is the transpose. So each coefficient matrix has rank at most four. Through order \(s\), the coefficient columns lie in a space of dimension at most \(4(s+1)\). In a determinant coefficient, at most four columns can be selected from any one coefficient matrix. Expand the determinant multilinearly in its columns, each written as a power series in \(a\). In a nonzero term at most four of the \(m\) columns come from each power \(a^k\), \(k\ge0\). So its total \(a\)-order is at least \(\sum_{j=0}^{m-1}\lfloor j/4\rfloor=N\). Equality holds when four columns come from each \(a^k\), \(0\le k\le m/4-1\). This gives the stated minimum \(a\)-weight.
+
+The rank statement holds over the formal series ring. It is not a statement about finitely many values of \(a\). Since \(\varrho\) has zero constant term, substituting \(X=T-\varrho(a)\) preserves the \(a\)-adic order. So \(\mathsf a^N\) divides \(\mathcal Q_m\). This proves Lemma~\ref{lem:a-divisor}.
+\end{proof}
+
+\begin{lemma}\label{lem:b-divisor}
+Let \(\mathcal Q_m\) be as above. Then \(\mathsf b^{\,mH-H_m}\) divides \(\mathcal Q_m\) in \(\mathbb Z[\mathsf a,T]\).
+\end{lemma}
+
+\begin{proof}
+By the formulas for \(c_i\) and \(c_j\), \(P_{ij}(r)=w[r,-i,-j]\) is the second divided difference of \(w\) at the nodes \(r,-i,-j\). Since \(\deg w=3g\), it is a symmetric polynomial in \((r,-i,-j)\) of total degree at most \(3g-2\). So \([r^d]P''_{ij}=(d+1)(d+2)[r^{d+2}]P_{ij}\) is a polynomial in \((i,j)\) of degree at most \(3g-4-d\). With \(x=1/a\),
+\[
+ \sum_{r\ge1}a^{-r}r^d=\Bigl(x\frac{d}{dx}\Bigr)^{d}\frac{x}{1-x}.
+\]
+This rational function has a pole of order \(d+1\) at \(x=1\). Since \(1-x=b/a\), this is a pole of order \(d+1\) at \(b=0\). Hence, for \(1\le s\le H\), the coefficient of \(b^{-s}\) in \(E_{ij}\) is a polynomial in \((i,j)\) of degree at most \(3g-3-s=H-s\). The harmonic corrections and the entries of \(C\) are Laurent polynomials in \(a\). They have no pole at \(b=0\).
+
+Order \(I\) and \(J\) increasingly. For \(0\le\alpha<m\), replace row \(\alpha\) by the \(\alpha\)-th forward difference of rows \(0,\ldots,\alpha\). Do the same for columns. These operations are unimodular. A forward difference of order \(\alpha\) lowers the degree of a polynomial by \(\alpha\). So the new entry \((\alpha,\alpha')\) has pole order at most \((H-\alpha-\alpha')_+\) at \(b=0\). Suppose \(k\) entries of a determinant term have a positive pole bound. Their row orders are distinct, and so are their column orders. Each set sums to at least \(k(k-1)/2\). So the pole order of the term is at most
+\[
+ kH-k(k-1)=k(H+1-k)\le\Bigl(\frac{3m}4-1\Bigr)^2=H_m.
+\]
+Each row of \(E+TC\) has pole order at most \(H\) at \(b=0\). So \(b^{mH}G_{m,a}(T)\) is regular at \(b=0\) and divisible by \(b^{mH-H_m}\), coefficientwise in \(T\). This proves Lemma~\ref{lem:b-divisor}.
+\end{proof}
+
+Since \(\mathsf a\) and \(\mathsf b\) are monic and coprime in \(\mathbb Z[\mathsf a]\), Lemmas~\ref{lem:a-divisor} and~\ref{lem:b-divisor} give
+\[
+ \mathcal R_m(\mathsf a,T)=\frac{\mathcal Q_m(\mathsf a,T)}{\mathsf a^N\mathsf b^{\,mH-H_m}}\in\mathbb Z[\mathsf a,T].
+\]
+For a fixed integer \(a\) with \(|a|\ge2\),
+\[
+ G_{m,a}(T)=\frac{a^N}{L^{4m}(a-1)^{H_m}}\,\mathcal R_m(a,T).
+\]
+
+\subsection{The common denominator}
+
+\begin{proposition}\label{prop:integerization}
+Set
+\[
+ F_p=4m d_p+H_m v_p(a-1)-Nv_p(a),
+ \quad e_p=\min\{F_p,W_m(p)+mH v_p(a-1)\},
+\]
+and \(\Delta_m(a)=\prod_p p^{e_p}\). Then \(\Delta_m(a)\) is a positive rational number. For every \(m\) with \(4\mid m\) and every fixed integer \(a\) with \(|a|\ge2\), we have \(\Delta_m(a)G_{m,a}(T) \in \mathbb{Z}[T]\).
+\end{proposition}
+
+\begin{proof}
+Negative \(e_p\) are allowed. Fix a prime \(p\). It suffices to show that each of the two exponents in \(e_p\) makes \(p^{e}G_{m,a}(T)\) \(p\)-integral.
+
+First alternative. By Lemmas~\ref{lem:a-divisor} and~\ref{lem:b-divisor}, 
+\[
+ G_{m,a}(T)=a^N\mathcal R_m(a,T)/(L^{4m}(a-1)^{H_m})
+\]
+with \(\mathcal R_m\in\mathbb Z[\mathsf a,T]\). Since \(\mathsf a\) and \(\mathsf b\) are monic and coprime, division by both factors stays in \({\mathbb Z}[\mathsf a,T]\). So every coefficient of \(G_{m,a}(T)\) has \(v_p\ge-F_p\). Fixed primes dividing \(a\) or \(a-1\) are retained here.
+
+Second alternative. Choose a potential \(\pi\) on \(I\cup J\) by the case of \(W_m(p)\). Take \(\pi=0\) for \(p>U\), \(\pi=2d_p\) in case (2), and \(\pi_n=\phi_n=2-\kappa_n\) in case (3). In case (4) take potential (I) or (II) of Lemma~\ref{lem:moving}, whichever has the smaller total. In case (5) take the weights of Lemma~\ref{lem:moving}. The total of \(\pi\) is \(W_m(p)\). In case (2) it is \(2m\cdot2d_p\). In case (3) it is \(\sum_{n=0}^{U}(2-\kappa_n)=4m-\sum_n\kappa_n\). In cases (4) and (5) Lemma~\ref{lem:moving} gives it.
+
+Expand \(\mathsf b^H(E+TC)_{ij}\) in \(\mathsf a\) and \(T\). Its polynomial part is \(\sum_\iota\gamma_{ij,\iota}\mathsf b^{H-\iota-1}\), by Lemma~\ref{lem:newton}. Its harmonic part and \(C\) are polynomials in \(\mathsf a\). Every coefficient has \(v_p\ge-(\pi_i+\pi_j)\), by Lemmas~\ref{lem:newton}, \ref{lem:one-carry}, \ref{lem:poly-part} and~\ref{lem:harmonic}. In case (2) this is the bound \(L^4\) of Lemmas~\ref{lem:newton} and~\ref{lem:harmonic}. For \(p>U\) no denominator contains \(p\). Now expand
+\[
+ \mathsf b^{mH}G_{m,\mathsf a}(T)=\det\bigl(\mathsf b^H(E+TC)\bigr)
+\]
+over permutations \(\varsigma\colon I\to J\). The term of \(\varsigma\) has \(v_p\ge-\sum_{i\in I}(\pi_i+\pi_{\varsigma(i)})=-\sum_{n\in I\cup J}\pi_n=-W_m(p)\). At the integer \(a\) divide by \(b^{mH}\), with \(b=a-1\ne0\). So every coefficient of \(G_{m,a}(T)\) has \(v_p\ge-W_m(p)-mHv_p(a-1)\).
+
+Hence \(p^{e_p}G_{m,a}(T)\in\mathbb Z_{(p)}[T]\) for every \(p\). For \(p>U\) with \(p\nmid a(a-1)\), \(F_p=W_m(p)=0\), so \(e_p=0\). Thus \(\Delta_m(a)\) is a positive rational and \(\Delta_m(a)G_{m,a}(T)\in\mathbb Z[T]\). The divisibilities by \(\mathsf a^N\) and \(\mathsf b^{\,mH-H_m}\) hold coefficientwise, so no finite-grid extrapolation enters. The rational \(\Delta_m(a)\) is a common denominator and need not equal the primitive content. This proves Proposition~\ref{prop:integerization}.
+\end{proof}
+
+\subsection{The arithmetic rate}
+
+\begin{lemma}\label{lem:profiles}
+Let \(x=p/m\). For \(g<p<m\) the normalized weight satisfies \(W_m(p)/m=\omega(x)+O(1/m)\), where
+\[
+ \omega(x)=
+ \begin{cases}
+ 6x-2,&1/2<x<5/8,\\
+ 3-2x,&5/8<x<2/3,\\
+ 7x-3,&2/3<x<3/4,\\
+ 5x-3/2,&3/4<x<5/6,\\
+ 7/2-x,&5/6<x<1.
+ \end{cases}
+\]
+The five integrals, in order, are \(11/64, 41/576, 47/288, 59/288, 31/72\); their sum is \(25/24\). For \(m\le{}p\le{}U\), up to \(O(1/m)\), the normalized profile is \(1/2+2x\) on \((1,5/4)\) and \(8-4x\) on \((5/4,2)\). Their integrals are \(11/16\) and \(9/8\), so this range contributes \(29/16\).
+\end{lemma}
+
+\begin{proof}
+Since \(u/m=x-1/2\), the counts of Lemma~\ref{lem:moving} give, up to \(O(1/m)\),
+\[
+ \frac{N_{\rm act}}m=\sum_{t=1}^3\bigl(\min(x-\tfrac12,\,2-tx)\bigr)_+,\qquad
+ \frac{\Sigma_K}m=\frac12+\Bigl(\frac52-4x\Bigr)_+ .
+\]
+The minima switch at \(x=5/8\) for \(t=3\) and at \(x=5/6\) for \(t=2\). The term \(t=3\) vanishes for \(x\ge2/3\). Put \(W_{\rm I}=3N_{\rm act}+u+\Sigma_K\) and \(W_{\rm II}=m+2N_{\rm act}+u\). On the four intervals cut at \(5/8,2/3,5/6\), the triple \((N_{\rm act},W_{\rm I},W_{\rm II})/m\) is
+\[
+\begin{gathered}
+ (3x-\tfrac32,\,6x-2,\,7x-\tfrac52),\qquad
+ (1-x,\,3-2x,\,\tfrac52-x),\\
+ (2x-1,\,7x-3,\,5x-\tfrac32),\qquad
+ (\tfrac32-x,\,\tfrac92-2x,\,\tfrac72-x).
+\end{gathered}
+\]
+The minimum is \(W_{\rm I}\) on \((1/2,3/4)\) and \(W_{\rm II}\) on \((3/4,1)\). The table uses four intervals, while \(\omega\) has five pieces: inside \((2/3,5/6)\) the minimum switches from \(W_{\rm I}\) to \(W_{\rm II}\) at \(x=3/4\), where \(7x-3=5x-3/2\). This gives \(\omega\). In units of \(1/576\), the five integrals are \(99,41,94,118,248\), with sum \(600\). For \(m\le p\le U\), the weight is \(4(2m-p)-3(2m+g-2p)_+\). Normalized, this is \(8-4x-3(5/2-2x)_+\), which gives the two stated pieces. In total,
+\[
+ \frac{25}{24}+\frac{29}{16}=\frac{50+87}{48}=\frac{137}{48}.
+\]
+This proves Lemma~\ref{lem:profiles}.
+\end{proof}
+
+\begin{lemma}\label{lem:carry}
+Set
+\[
+ \begin{aligned}
+ \mathcal B_m&=\prod_{n=0}^{2m-1}\binom{n+g}{g},\\
+ \mathcal T&=\lim_{m\to\infty}\frac{\log \mathcal B_m}{m^2}\\
+ &=\int_0^2\bigl((y+1/2)\log(y+1/2)-y\log y-(1/2)\log(1/2)\bigr)\,dy.
+ \end{aligned}
+\]
+Then
+\[
+ \mathcal T=\frac{25}{8}\log5-4\log2-\frac12.
+\]
+Let \(m\ge8\) and \(p>g\). Then \(p^2>U+g\), since \(p^2-(U+g)\ge(m/2+1)^2-(5m/2-1)=(m-2)(m-4)/4\). The exact carry profile of \(v_p(\mathcal B_m)/m\), with \(x=p/m\), is
+\[
+ k(x)=\frac12\left\lfloor\frac2x\right\rfloor+
+       \left(\frac52-(\lfloor2/x\rfloor+1)x\right)_+,
+       \qquad \frac12<x\le\frac52.
+\]
+Its integral is \(\int_{1/2}^{5/2}k(x)\,dx=43/32\).
+\end{lemma}
+
+\begin{proof}
+By Stirling's formula, \(\log\binom{n+g}{g}\) is \(m\) times the integrand of \(\mathcal T\) at \(y=n/m\), up to \(O(\log m)\). This holds uniformly for \(0\le n<2m\). Summing over \(n\) gives the integral. Since
+\[
+ \int_{1/2}^{5/2}y\log y\,dy=\frac{25}8\log5-3\log2-\frac32,\qquad
+ \int_0^2y\log y\,dy=2\log2-1,
+\]
+we get \(\mathcal T=\frac{25}8\log5-3\log2-\frac32-(2\log2-1)+\log2\), the stated value.
+
+Let \(m\ge8\) and \(p>g\), so \(p^2>U+g\). Legendre's formula has at most one carry. So \(v_p\binom{n+g}{g}=1\) exactly when \(n\bmod p\ge p-g\), and \(0\) otherwise. These \(n\) form the windows \([tp-g,tp)\), \(t\ge1\). The windows with \(tp\le2m\) lie in \([0,2m)\), and there are \(\lfloor2m/p\rfloor\) of them. The next window meets \([0,2m)\) in length \((2m+g-(\lfloor2m/p\rfloor+1)p)_+\). Dividing by \(m\) gives \(k(x)\). On the intervals cut at \(5/8,2/3,5/6,1,5/4,2\), \(k\) equals
+\[
+ 4-4x,\ \tfrac32,\ \tfrac72-3x,\ 1,\ 3-2x,\ \tfrac12,\ \tfrac52-x,
+\]
+with integrals \(7/32,1/16,5/24,1/6,3/16,3/8,1/8\). Their sum is \(129/96=43/32\). This proves Lemma~\ref{lem:carry}.
+\end{proof}
+
+\begin{proposition}\label{prop:rate}
+For every fixed integer \(a\) with \(|a|\ge2\),
+\[
+ \limsup_{4\mid m}\frac{\log\Delta_m(a)}{m^2}
+ \le \tau(a):=S+\frac9{16}\log|a-1|-\frac18\log|a|,
+\]
+where
+\[
+ S=\frac{643}{96}+4\log 2-\frac{25}{8}\log 5
+   =4.44101\ldots.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:carry}, which applies for \(m\ge8\), the prime number theorem and partial summation,
+\[
+ \lim\frac1{m^2}\sum_{p\le g}v_p(\mathcal B_m)\log p=\mathcal T-\frac{43}{32}.
+\]
+Since \(4m \vartheta(g)/m^2 \to 2\), with Chebyshev's function \(\vartheta(x)=\sum_{p\le x}\log p\), the \(p\le{}g\) moving-prime contribution is \(2-(\mathcal T-43/32)=123/32+4 \log 2-(25/8)\log 5\). The profile of Lemma~\ref{lem:profiles} is continuous on \((1/2,2)\), so \(W_m(p)/m\) equals it at \(x=p/m\) up to \(O(1/m)\), uniformly in \(p\). Applying the prime number theorem on each linear piece, the primes \(g<p\le U\) contribute \(25/24+29/16\) by Lemma~\ref{lem:profiles}.
+
+The case \(p^2\le{}U+g\), which precedes the moving-prime branches, contributes at most
+\[
+ 4m\sum_{p\le\sqrt{U+g}}d_p\log p
+ \le4m\lfloor\sqrt{U+g}\rfloor\log U
+ =O(m^{3/2}\log m)=o(m^2).
+\]
+It includes every prime power through \(d_p=\lfloor\log_p U\rfloor\). The same bound controls the difference between this coarse branch and the one-carry model for these primes. Each of the \(2m\) binomial factors in \(\mathcal B_m\) has valuation at most \(\lfloor\log_p(U+g)\rfloor\). Their total over \(p\le\sqrt{U+g}\) is \(O(m^{3/2}\log m)\). For the remaining primes \(p^2>U+g\), Legendre's formula has at most one carry. Partial summation against \(\vartheta(x)=x+o(x)\) gives the piecewise-affine profile integrals above. The finitely many rational profile walls contribute \(o(m^2)\). Moving the lower wall \(\sqrt{U+g}/m\) to zero changes the normalized sum by \(o(1)\), by the same bound.
+
+Fixed primes dividing \(a\) or \(a-1\) are retained in the first alternative of \(e_p\). They give \(-N/m^2\to-1/8\) and \(H_m/m^2\to9/16\). Finally \(123/32+25/24+29/16=643/96\), which gives the displayed \(S\). This proves Proposition~\ref{prop:rate}.
+\end{proof}
+
+\section{Nonvanishing along a prime-power subsequence}\label{sec:nonvanishing}
+
+Proposition~\ref{prop:tower} below uses a prime \(p\) chosen from \(a\). It reduces \(G_{4p^k,a}\) modulo \(p\) to a power of the seed determinant \(G_{4,a}\).
+
+\begin{lemma}\label{lem:seed}
+Let \(H_0\) be the degree-22 integer polynomial whose coefficients are listed in Appendix~\ref{app:seed}. Then
+\[
+ G_{4,a}(0)=\frac{H_0(a)}{2^{18}\cdot3^{9}\cdot5^{12}\cdot7^{4}(a-1)^4}.
+\]
+The residues of \(H_0\) at \(a=0,\ldots,12\) modulo \(13\) are
+\[
+ (10,4,11,4,4,11,1,3,11,6,7,9,10).
+\]
+So \(H_0(a)\) is nonzero for every integer \(a\).
+\end{lemma}
+
+\begin{proof}
+For \(m=4\) the entries of \((a-1)^3E(a)\) are polynomials in \(a\) by Lemma~\ref{lem:decomposition}, since \(\deg P_{ij}\le4\) for \(m=4\). Expanding the \(4\times4\) determinant exactly over \(\mathbb Q[a]\) gives the identity (Appendix~\ref{app:checks}). Evaluate the coefficients of Table~\ref{tab:seed-coefficients} at \(a=0,\ldots,12\) modulo \(13\). This gives the listed residues. None is zero, so \(13\nmid H_0(a)\) for every integer \(a\). This proves Lemma~\ref{lem:seed}.
+\end{proof}
+
+Fix an integer \(a\) with \(|a|\ge2\), and choose a prime divisor \(p\) of
+\[
+ 12!\,|a(a-1)H_0(a)|+1.
+\]
+Then \(p>12\), and \(p\) divides none of \(a\), \(a-1\), \(H_0(a)\), or the seed denominator. Put \(Q=p^k\), \(m=4Q\), \(g=2Q\), and work in \(R={\mathbb Z}_{(p)}\). All congruences below are coefficientwise. The superscript seed marks the objects of Section~\ref{sec:determinant} that define the seed determinant, with row index \(i_0\) and column index \(j_0\). The tower row of Appendix~\ref{app:checks} is a finite check; the proof for all \(k\) does not use it.
+
+\subsection{The local tower}\label{subsec:tower}
+
+\begin{lemma}\label{lem:binomial-reduction}
+For \(0\le s<Q\), set
+\[
+ \Phi_s(x)=\binom{Qx-s-1}{2Q}.
+\]
+Then \(\Phi_s(x)\in R[x]\) and
+\[
+ \Phi_s(x)\equiv\binom{x-1}{2}\pmod p
+\]
+coefficientwise.
+\end{lemma}
+
+\begin{proof}
+Write the numerator of \(\Phi_s\) as the product of the \(2Q\) linear factors \(Qx-s-1-j\), \(0\le{}j<2Q\). For each \(e\le{}k\), exactly \(2Q/p^e\) of their constant terms are divisible by \(p^e\). So the \(p\)-adic content of the product has valuation \(\sum_{e=1}^k 2Q/p^e=v_p((2Q)!)\). Division by \((2Q)!\) proves \(\Phi_s(x)\in R[x]\). After this content is removed, only the two factors whose constant terms are divisible by \(Q\) can contribute degree in the reduction. So \(\deg(\Phi_s \bmod p)\le2\). At \(x=0\), the identity \(\binom{-s-1}{2Q}=\binom{s+2Q}{2Q}\) and Lucas' theorem give residue 1. At \(x=1\) and \(x=2\) the binomial coefficients are zero. These are the values of \(\binom{x-1}{2}\) at 0, 1, 2. Since \(p>2\) and the reduced degree is at most two, this proves Lemma~\ref{lem:binomial-reduction}.
+\end{proof}
+
+\begin{lemma}\label{lem:local-poly}
+Let \(i\in I\) and \(j\in J\). Write \(i=Qi_0+s_i\), \(j=Qj_0+s_j\), with \(0\le{}i_0\le3\), \(4\le{}j_0\le7\), and \(0\le{}s_i,s_j<Q\). Fix \(s\in\{0,\ldots,Q-1\}\), and put
+\[
+ \Xi_i(x)=\frac Q{Qx+i-s},\quad \Xi_j(x)=\frac Q{Qx+j-s},
+\]
+with \(\Phi_s\) as in Lemma~\ref{lem:binomial-reduction} and \(c_i\), \(c_j\) as in Section~\ref{sec:determinant}. Then
+\begin{equation}\label{eq:local-identity}
+ Q^2P_{ij}(Qx-s)
+ =\Phi_s(x)^3\Xi_i(x)\Xi_j(x)-Qc_i\Xi_i(x)-Qc_j\Xi_j(x),
+\end{equation}
+\(Q^2P_{ij}(Qx-s) \in R[x]\), and
+\begin{equation}\label{eq:local-second}
+ Q^4P''_{ij}(Qx-s)\equiv
+ 1_{s_i=s_j=s}\,(P^{\rm seed}_{i_0,j_0})''(x)\pmod p.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Identity \eqref{eq:local-identity} is the partial-fraction identity of Section~\ref{sec:determinant} at \(r=Qx-s\), multiplied by \(Q^2\). If both offsets are nonzero, \(|i-s|,|j-s|<8Q\) implies \(v_p(i-s),v_p(j-s)\le{}k\). Hence each \(\Xi_n=(Q/d)/(1+(Q/d)x)\), with offset \(d=n-s\), is in \(R[[x]]\), and its reduction is zero unless \(Q|d\). There cannot be two zero offsets, because \(I\) and \(J\) are disjoint. If, for example, \(i=s\), then \(\Xi_i=1/x\). Its only possible negative-power coefficient on the right side of \eqref{eq:local-identity} is
+\[
+ \Phi_s(0)^3\Xi_j(0)-Qc_i
+ =\Phi_s(0)^3\frac Q{j-i}-Q\frac{w(-i)}{j-i}=0.
+\]
+So the Laurent principal part cancels exactly, and the remaining Taylor series is \(p\)-integral. Gauss integrality gives \(Q^2P_{ij}(Qx-s) \in R[x]\). The argument divides only by monic polynomials.
+
+Modulo \(p\), \eqref{eq:local-identity} is zero unless \(s_i=s_j=s\). In that matching case, by Lemma~\ref{lem:binomial-reduction}, it is the seed polynomial part of \(\binom{x-1}{2}^3/((x+i_0)(x+j_0))\). The reduced residues are \(w^{\rm seed}(-i_0)/(j_0-i_0)\) and \(-w^{\rm seed}(-j_0)/(j_0-i_0)\), since \(0<|j_0-i_0|\le7<p\). The same cancellation covers \(i_0=0\), with no separate evaluation at a pole. Differentiating the polynomial identity twice gives \eqref{eq:local-second}. This proves Lemma~\ref{lem:local-poly}.
+\end{proof}
+
+\begin{lemma}\label{lem:entries}
+For \(i_0,j_0\) as in Lemma~\ref{lem:local-poly} and \(0\le s,s'<Q\), in \(R\),
+\[
+ Q^4E_{Qi_0+s,Qj_0+s'}\equiv1_{s=s'}a^sE^{\rm seed}_{i_0,j_0},\qquad
+ QC_{Qi_0+s,Qj_0+s'}\equiv1_{s=s'}a^sC^{\rm seed}_{i_0,j_0}\pmod p.
+\]
+\end{lemma}
+
+\begin{proof}
+The polynomial \(f(r)=Q^4P''_{ij}(r)\) is \(p\)-integral at every integer. Every integer has a unique form \(r=Qx-s\), with \(0\le s<Q\), and \eqref{eq:local-identity}--\eqref{eq:local-second} have \(p\)-integral coefficients. So its complete Newton expansion is
+\begin{equation}\label{eq:newton-gf}
+ f(r)=\sum_{\iota=0}^{3g-4}\gamma_\iota\binom{r-1}{\iota},\qquad \gamma_\iota\in R,
+ \quad
+ \sum_{r\ge1}z^rf(r)
+ =\sum_{\iota=0}^{3g-4}\gamma_\iota\frac{z^{\iota+1}}{(1-z)^{\iota+1}}.
+\end{equation}
+The last identity is a finite identity of rational functions. Now partition the positive integers as \(r=Qx-s\) (\(x\ge1\), \(0\le{}s<Q\)) in \eqref{eq:local-second}. Explicitly, for each \(s\) put \(f_s(x)=f(Qx-s)=Q^4P''_{ij}(Qx-s)\in R[x]\). Its values at integers lie in \(R\), so its Newton coefficients \(\gamma_\iota(s)=(\Delta^\iota f_s)(1)\) lie in \(R\), and
+\[
+ \sum_{x\ge1}a^{-Qx}f_s(x)=\sum_{\iota=0}^{3g-4}\frac{\gamma_\iota(s)}{(a^Q-1)^{\iota+1}},
+ \qquad
+ Q^4\sum_{r\ge1}a^{-r}P''_{ij}(r)=\sum_{s=0}^{Q-1}a^s\sum_{x\ge1}a^{-Qx}f_s(x).
+\]
+Here \(a^Q-1\equiv a-1\pmod p\) is a unit of \(R\). By \eqref{eq:local-second}, \(\gamma_\iota(s)\) reduces to zero unless \(s_i=s_j=s\), and in that case to the corresponding Newton coefficient of the seed polynomial part. Only the matching class survives. Its generating function is \(a^s\) times the seed polynomial-part generating function at \(a^Q\). Here \(a^Q=a\) in \(\mathbb F_p\), and both \(1-a^Q\) and \(1-a\) are units. So \eqref{eq:newton-gf} gives the polynomial-part entry congruence for every \(k\), including the coefficients that the finite check of Appendix~\ref{app:checks} does not reach.
+
+For the pole contribution use \(\mathsf h_3\) of Section~\ref{sec:determinant}. By Lemma~\ref{lem:decomposition}, \(E_{\rm pole}=-2c_i a^i \mathsf h_3(i)-2c_j a^j \mathsf h_3(j)\) and \(C=2c_i a^i+2c_j a^j\). Since \(i,j<8Q\), every summation index \(e\le j\) of \(\mathsf h_3\) has \(v_p(e)\le k\). Hence \(Q^3/e^3\) is \(p\)-integral and reduces to zero unless \(Q\mid e\). Also \(Qc_i\) and \(Qc_j\) are \(p\)-integral and reduce to zero unless the two index residues agree. In the matching block, \(i=Qi_0+s\) and \(j=Qj_0+s\). Then \(Qc_i\equiv c_{i_0}^{\rm seed}\), \(Qc_j\equiv c_{j_0}^{\rm seed}\), \(a^{Qi_0+s}\equiv a^{i_0+s}\), and \(Q^3\mathsf h_3(Qi_0+s)\equiv \mathsf h_3(i_0)\) modulo \(p\); the same holds for \(j\). This covers the polynomial part, both poles, both derivatives, and the Newton sums. This proves Lemma~\ref{lem:entries}.
+\end{proof}
+
+\begin{proposition}\label{prop:tower}
+Let \(a\), \(p\), \(Q=p^k\) and \(m=4Q\) be as above. Coefficientwise in \(\mathbb{Z}_{(p)}[X]\),
+\[
+ Q^{4m}G_{4Q,a}(X/Q^3)\equiv G_{4,a}(X)^Q\pmod p.
+\]
+\end{proposition}
+
+\begin{proof}
+Group rows and columns by residues in the determinant, and apply Lemma~\ref{lem:entries}. The permutation signs occur once for rows and once for columns and cancel. The block with residue \(s\) is \(a^s\) times a \(4\times4\) seed block. So the remaining scalar is \(\prod_{s=0}^{Q-1}a^{4s}=a^{2Q(Q-1)}\). Since \(p\nmid a\) and \((p-1)\mid(Q-1)\), Fermat's theorem gives \(a^{Q-1}\equiv1\pmod p\). Hence \(a^{2Q(Q-1)}=(a^{Q-1})^{2Q}\equiv1\pmod p\). This proves Proposition~\ref{prop:tower}.
+\end{proof}
+
+\begin{proposition}\label{prop:nonvanishing}
+Let \(a\) and \(p\) be as above. For every fixed rational \(\xi\),
+\[
+ G_{4p^k,a}(\xi)\ne0
+\]
+for all sufficiently large \(k\). The selected prime depends on \(a\), not on \(\xi\), while the starting index may depend on both.
+\end{proposition}
+
+\begin{proof}
+Choose \(k\) so that \(3k+v_p(\xi)\ge1\), with \(v_p(0)=\infty\). Then \(Q^3\xi\in pR\). The whole normalized polynomial is \(p\)-integral. So Proposition~\ref{prop:tower} at \(X=Q^3\xi\) gives
+\[
+ Q^{4m}G_{4Q,a}(\xi)
+ \equiv G_{4,a}(0)^Q\not\equiv0\pmod p.
+\]
+The right side is nonzero by Lemma~\ref{lem:seed} and the choice of \(p\). This proves Proposition~\ref{prop:nonvanishing}.
+\end{proof}
+
+\section{Analytic determinant estimate}\label{sec:analytic}
+
+For \(q=|a|\), \(\lambda=\log q\), and probability measures \(\mu\) on \([1/2,\infty)\) with density \(0\le f\le3\) and finite first moment, define
+\[
+ h(t)=t\log t-(t-1/2)\log(t-1/2)+(1/2)\log2,\qquad
+ B(t)=\int_0^2\log(t+s)\,ds,
+\]
+\[
+ \mathcal E_\lambda(\mu)=\frac32+\int(B-3h+\lambda t)\,d\mu(t)
+ -\iint\log|t-s|\,d\mu(t)d\mu(s),
+ \qquad A(\lambda)=\inf_\mu \mathcal E_\lambda(\mu).
+\]
+Here \(0\log0=0\). These measures form the energy domain.
+
+\subsection{Andreief expansion and local estimates}\label{subsec:analytic-details}
+
+Let \(f_i(z)=(z+i)^{-1}\), \(k_j(z)=(z+j)^{-1}\), and
+\[
+ \mathcal F(z_1,\ldots,z_m)=
+ \prod_{\ell=1}^m w(z_\ell)
+ \det[f_i(z_\ell)]_{i\in I,\ell}
+ \det[k_j(z_\ell)]_{j\in J,\ell}.
+\]
+
+\begin{lemma}\label{lem:andreief}
+For a finite cutoff \(N_0\), let \(\mathcal I_{N_0}(\psi)=\sum_{r=1}^{N_0} a^{-r}\psi''(r)\). Then
+\[
+ \det[\mathcal I_{N_0}(w f_i k_j)]
+ =\frac{1}{m!}\mathcal I_{N_0}^{\otimes m}
+ \bigl(\mathcal F\bigr).
+\]
+The identity persists as \(N_0\to\infty\).
+\end{lemma}
+
+\begin{proof}
+This is the algebraic Andreief identity. Expanding the permutations proves it directly. Each derivative has polynomial growth, and the factor \(|a|^{-\sum r_\ell}\) is geometric. So the limit \(N_0\to\infty\) exists by absolute convergence. For negative \(a\), the exact factor \((-1)^{\sum r_\ell}\) is retained until the final absolute value. This proves Lemma~\ref{lem:andreief}.
+\end{proof}
+
+\begin{lemma}\label{lem:occupancy}
+Up to a fixed sign, the summand in Lemma~\ref{lem:andreief} equals
+\begin{equation}\label{eq:cauchy-form}
+ \frac{\left(\prod_\ell\prod_{s=1}^g(z_\ell-s)^3\right)
+   \left(\prod_{\ell<\ell'}(z_\ell-z_{\ell'})^2\right)}
+  {(g!)^{3m}\prod_\ell\prod_{i=0}^{2m-1}(z_\ell+i)}
+ \left(\prod_{i<i'}(i'-i)\right)
+ \left(\prod_{j<j'}(j'-j)\right) .
+\end{equation}
+Every nonzero term of the multiple sum has occupancy at most three; triple occupancy is allowed.
+\end{lemma}
+
+\begin{proof}
+The formula is Cauchy's double alternant \cite[(2.7)]{Krattenthaler}. At \(1\le r_\ell\le g\), the triple zero of \(w\) leaves only two derivatives in that variable, and the summand vanishes. If \(\nu\) variables have the same integer value, their internal Vandermonde square has order \(\nu(\nu-1)\). The available derivatives have total order \(2\nu\). So every nonzero term has occupancy at most three. This proves Lemma~\ref{lem:occupancy}.
+\end{proof}
+
+Use independent circles \(|z_\ell-r_\ell|\le1/4\). All poles are outside. The multivariate Cauchy estimate contributes \(32^m\). Write \(t_\ell=r_\ell/m\). Replace an ordered tuple by the density \(\mu\) whose value on each cell \([r/m,(r+1)/m)\) is the occupancy of \(r\). By Lemma~\ref{lem:occupancy}, this is a probability density, bounded by 3, supported on \([1/2,\infty)\). In this section the cost of a step is what it adds to the upper bound for \(\log|\cdot|\) of a summand.
+
+\begin{lemma}\label{lem:real-cell}
+Put
+\[
+ e_d=\log d-\int_0^1\!\int_0^1\log|d+u-v|\,du\,dv.
+\]
+Then \(e_1=3/2-2\log2<1/8\), and for \(d\ge2\),
+\[
+ e_d=\sum_{j\ge1}\frac{1}{j(2j+1)(2j+2)d^{2j}}
+ \le \frac{1}{12d(d-1)}.
+\]
+With occupancy at most 3, the distinct-site logarithms obey
+\begin{equation}\label{eq:real-cell}
+ \sum_{\ell\ne\ell'}\log\bigl(\max(1,|r_\ell-r_{\ell'}|)/m\bigr)
+ \le m^2 L(\mu,\mu)+m\log m+6m,
+\end{equation}
+where \(L(\mu,\mu)=\iint\log|t-s|\,d\mu(t)d\mu(s)\).
+\end{lemma}
+
+\begin{proof}
+Direct integration gives \(\int_0^1\!\int_0^1\log|1+u-v|\,du\,dv=2\log2-3/2\). Hence
+\[
+ e_1=\frac32-2\log2<\frac18.
+\]
+The inequality holds since \(\log2=2\operatorname{artanh}(1/3)>2(1/3+1/81)=56/81>11/16\). For \(d\ge2\), expand the logarithm in \(|u-v|/d\). Odd powers integrate to zero, and
+\[
+ \int_0^1\!\int_0^1(u-v)^{2j}\,du\,dv
+ =\frac{2}{(2j+1)(2j+2)}.
+\]
+This gives the series for \(e_d\). Since \(1/[j(2j+1)(2j+2)]\le1/12\),
+\[
+ e_d\le\frac1{12}\sum_{j\ge1}d^{-2j}
+ =\frac1{12(d^2-1)}\le\frac1{12d(d-1)}.
+\]
+Also \(\sum_{d\ge2}[12d(d-1)]^{-1}=1/12\). Hence
+\begin{equation}\label{eq:ed-sum}
+ \sum_{d\ge1}e_d<\frac18+\frac1{12}=\frac5{24}.
+\end{equation}
+
+Let \(\nu_r\in\{0,1,2,3\}\) be the occupancy of the integer center \(r\). Then \(\sum_r \nu_r=m\), and \(\mu=\nu_r\) on \(\mathcal C_r=[r/m,(r+1)/m)\). So \(\int\mu=1\). Since \(\int_0^1\int_0^1\log|u-v|\,du\,dv=-3/2\), a cell-by-cell comparison gives
+\[
+ \begin{aligned}
+ &m^2L(\mu,\mu)\\
+ &\qquad=\sum_{r\ne s}\nu_r\nu_s\left(\log\frac{|r-s|}{m}-e_{|r-s|}\right)
+   +\sum_r \nu_r^2\left(-\log m-\frac32\right),\\
+ &\sum_{\ell\ne\ell'}\log\bigl(\max(1,|r_\ell-r_{\ell'}|)/m\bigr)\\
+ &\qquad=\sum_{r\ne s}\nu_r\nu_s\log\frac{|r-s|}{m}
+   +\sum_r \nu_r(\nu_r-1)(-\log m).
+ \end{aligned}
+\]
+The first sum runs over ordered pairs of distinct cells. For \(r=s\), the left side contains only the \(\nu_r(\nu_r-1)\) distinct particle pairs. So the self-cell part of the difference is \(\nu_r\log m+(3/2)\nu_r^2\). Subtracting the two identities gives
+\begin{equation}\label{eq:real-cell-diff}
+\begin{aligned}
+ &\sum_{\ell\ne\ell'}\log\bigl(\max(1,|r_\ell-r_{\ell'}|)/m\bigr)-m^2L(\mu,\mu)\\
+ &\qquad=\sum_{r\ne s}\nu_r\nu_s e_{|r-s|}
+   +m\log m+\frac32\sum_r \nu_r^2.
+\end{aligned}
+\end{equation}
+For fixed \(r\) and \(d\ge1\), at most two cells lie at distance \(d\), each with occupancy at most three. By \eqref{eq:ed-sum},
+\[
+ \sum_{r\ne s}\nu_r\nu_s e_{|r-s|}\le6m\sum_{d\ge1}e_d<\frac54m,\qquad
+ \frac32\sum_r \nu_r^2\le\frac92m.
+\]
+Put these bounds into \eqref{eq:real-cell-diff}. This gives \eqref{eq:real-cell}. This proves Lemma~\ref{lem:real-cell}.
+\end{proof}
+
+\begin{lemma}\label{lem:vandermonde}
+The logarithm of the product of the fixed row and column Vandermonde factors is at most
+\begin{equation}\label{eq:fixed-vdm}
+ m(m-1)\log m-\frac32m^2+m\log m+2m.
+\end{equation}
+The moving complex Vandermonde satisfies
+\begin{equation}\label{eq:moving-vdm}
+ \log|\Delta(z)^2|
+ \le m(m-1)\log m+m^2L(\mu,\mu)+4m\log m+9m.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put
+\[
+ \mathcal D_m=\prod_{0\le i<i'<m}(i'-i).
+\]
+Each difference \(d\) occurs \(m-d\) times. Hence
+\[
+ \mathcal D_m=\prod_{d=1}^{m-1}d^{\,m-d}=\prod_{k=1}^{m-1}k!.
+\]
+The shift \(j\mapsto j-m\) maps \(J\) onto \(I\). So both fixed factors \(\prod_{i<i'}(i'-i)\) and \(\prod_{j<j'}(j'-j)\) in \eqref{eq:cauchy-form} equal \(\mathcal D_m\). Put
+\[
+ \zeta_m(x)=(m-x)\log x\qquad(1\le x\le m).
+\]
+For \(m\ge2\),
+\[
+ \zeta_m''(x)=-\frac{x+m}{x^2}<0,\qquad \zeta_m(1)=\zeta_m(m)=0.
+\]
+By concavity, the trapezoid inequality on each interval \([k,k+1]\) gives
+\[
+ \int_k^{k+1}\zeta_m(x)\,dx
+ \ge\frac{\zeta_m(k)+\zeta_m(k+1)}2.
+\]
+Sum over \(k=1,\ldots,m-1\). The endpoint values vanish. Hence
+\[
+ \log \mathcal D_m=\sum_{k=1}^{m-1}\zeta_m(k)
+ \le\int_1^m(m-x)\log x\,dx
+ =\frac12m^2\log m-\frac34m^2+m-\frac14.
+\]
+Therefore
+\[
+ 2\log \mathcal D_m
+ \le m^2\log m-\frac32m^2+2m-\frac12.
+\]
+Since \(m(m-1)\log m+m\log m=m^2\log m\), this is stronger than \eqref{eq:fixed-vdm}.
+
+For the moving complex Vandermonde, unequal centers at distance \(d\) satisfy \(\log(d+1/2)\le\log d+1/(2d)\). Equal centers contribute at most \(\log(1/2)\le0\). At each positive distance at most six particles occur. So the reciprocal-distance sum is at most \(6\mathcal S_m\) per particle, where \(\mathcal S_n=\sum_{d=1}^n d^{-1}\le1+\log n\) for \(n\ge1\). Combining this with \eqref{eq:real-cell} gives \eqref{eq:moving-vdm}. This proves Lemma~\ref{lem:vandermonde}.
+\end{proof}
+
+\begin{lemma}\label{lem:weight}
+For \(r\ge g+1\) and \(z\) on the circle around \(r\) used above,
+\begin{equation}\label{eq:weight}
+ |w(z)|\le \binom{r-1}{g}^{3}\exp\!\left(\frac34\mathcal S_g\right)
+ \le \exp\!\left(3m h(r/m)+\frac34(1+\log m)\right),
+\end{equation}
+with \(\mathcal S_g\le\mathcal S_m\) as in Lemma~\ref{lem:vandermonde}. For each particle, the \(2m\) denominator factors cost at most \(4/3\). Over all particles the cost is at most \(4m/3\le2m\). Also, for \(t\ge1/2\),
+\begin{equation}\label{eq:riemann}
+ \sum_{i=0}^{2m-1}\log(t+i/m)\ge mB(t)-\log5,\qquad
+ B(t)=\int_0^2\log(t+s)\,ds.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first inequality in \eqref{eq:weight} follows from \(\log(1+y)\le y\) on each factor of the triple product. The binomial entropy inequality proves the second one.
+For integers \(n\ge1\) and \(0<k<n\), put \(x=k/n\). The binomial probability of its \(k\)-th term gives
+\[
+ 1\ge\binom nkx^k(1-x)^{n-k}.
+\]
+Hence
+\begin{equation}\label{eq:binom-entropy}
+ \binom nk\le
+ \exp\!\left(n\log n-k\log k-(n-k)\log(n-k)\right),
+\end{equation}
+with \(0\log0=0\). The cases \(k=0\) and \(k=n\) are immediate. Take \(n=r\), \(k=g=m/2\), and \(t=r/m\). Since \(r\ge g+1\), \(\binom{r-1}{g}\le\binom rg\), and \eqref{eq:binom-entropy} gives
+\[
+ \binom{r-1}{g}\le\exp\!\left(r\log r-g\log g-(r-g)\log(r-g)\right).
+\]
+Substitute \(r=mt\), \(g=m/2\), and \(r-g=m(t-1/2)\). The exponent becomes
+\[
+ m\left[t\log t-(t-\tfrac12)\log(t-\tfrac12)+\tfrac12\log2\right]=m h(t).
+\]
+Therefore \(\binom{r-1}{g}^{3}\le\exp(3m h(t))\). The disk estimate supplies the separate factor \(\exp(3\mathcal S_g/4)\), and \(\mathcal S_g\le1+\log m\).
+For the denominators, \(|z+i|\ge(r+i)(1-y_i)\) with \(y_i=1/[4(r+i)]\le1/4\). Since \(-\log(1-y)\le y/(1-y)\le4y/3\) for \(0\le y\le1/4\), and \(r\ge g+1>m/2\), the cost \(\sum_i\log((r+i)/|z+i|)\) of one particle is at most
+\[
+ \frac43\sum_{i=0}^{2m-1}y_i=\frac13\sum_{i=0}^{2m-1}\frac1{r+i}
+ \le\frac{2m}{3r}<\frac43 .
+\]
+Over the \(m\) particles this is at most \(4m/3\le2m\). For \eqref{eq:riemann}, the logarithm is increasing. So the right Riemann sum satisfies
+\[
+ \sum_{i=1}^{2m}\log\Bigl(t+\frac im\Bigr)\ge m\int_0^2\log(t+s)\,ds=mB(t).
+\]
+The left sum in \eqref{eq:riemann} equals this right sum minus \(\log((t+2)/t)\). For \(t\ge1/2\), \((t+2)/t\le5\). This gives \eqref{eq:riemann}. This proves Lemma~\ref{lem:weight}.
+\end{proof}
+
+\begin{proposition}\label{prop:analytic}
+Let \(a\) be an integer with \(|a|\ge2\), and let \(4\mid m\). Then
+\begin{equation}\label{eq:determinant-bound}
+ \log|\det M(a)|
+ \le -m^2 A(\log|a|-1/m)
+       +4m\log m+(23+\tfrac12\log|a|)m.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:andreief}, write the differentiated Andreief summand with the two Cauchy determinants of \eqref{eq:cauchy-form} and the weight \(w\). Set \(q=|a|\), \(\lambda=\log q\), and \(\beta=\lambda-1/m>0\). Reserve \(\exp(-\sum r_\ell/m)\) from \(q^{-\sum r_\ell}\).
+
+Cauchy's estimate on circles of radius \(1/4\) contributes \(32^m\). Real-cell smoothing, Lemma~\ref{lem:real-cell}, enters only through the moving Vandermonde bound below; its \(m\log m+6m\) is part of the \(4m\log m+9m\) there. The two fixed Vandermonde factors contribute \(m(m-1)\log m-(3/2)m^2+m\log m+2m\). The moving complex Vandermonde, including self-energy and the six nearest-distance classes, contributes at most \(m(m-1)\log m+m^2L(\mu,\mu)+4m\log m+9m\). The binomial weight contributes \(3mh(t)+(3/4)(1+\log m)\) per particle. The function \(h\) is increasing on the support. Hence \(h(r/m)\le m\int_{r/m}^{(r+1)/m}h(t)\,dt\). So the cell average of \(h\) replaces \(h(t_\ell)\) at no cost. The denominator Riemann sum contributes \(mB(t)-\log5\), with an additional \(2m\) pole loss. Since \(B\) is increasing and \(B'(t)=\log((t+2)/t)\le\log5\), the cell average of \(B\) exceeds \(B(r/m)\) by at most \((\log5)/m\). Over the \(m\) particles this costs at most \(m\log5\). The fixed and the moving Vandermonde bounds each contain the term \(m(m-1)\log m\). The \(2m^2\) denominator factors \(|z_\ell+i|\) give \(-2m^2\log m\) when each is normalized by \(m\), as in \eqref{eq:riemann}. The net homogeneous factor is therefore exactly \(m^{-2m}\).
+
+With the occupancies \(\nu_r\) of the proof of Lemma~\ref{lem:real-cell},
+\[
+ \begin{aligned}
+ \int t\,d\mu(t)
+ &=\sum_r \nu_r\int_{r/m}^{(r+1)/m}t\,dt\\
+ &=\frac1{m^2}\sum_r \nu_r\left(r+\frac12\right)
+ =\frac1{m^2}\left(\sum_{\ell=1}^m r_\ell+\frac m2\right).
+ \end{aligned}
+\]
+Equivalently,
+\begin{equation}\label{eq:mean-midpoint}
+ \frac1m\sum_{\ell=1}^m r_\ell
+ =m\int t\,d\mu(t)-\frac12.
+\end{equation}
+The reserved factor splits \(q^{-\sum_\ell r_\ell}\) as
+\[
+ q^{-\sum_\ell r_\ell}
+ =\exp\!\left(-\beta\sum_\ell r_\ell\right)
+  \exp\!\left(-\frac1m\sum_\ell r_\ell\right).
+\]
+By \eqref{eq:mean-midpoint}, the first factor is exactly
+\[
+ \exp\!\left(-\beta m^2\int t\,d\mu(t)+\frac{\beta m}{2}\right).
+\]
+Since \(\beta<\lambda\), its positive prefactor satisfies
+\[
+ \exp\!\left(\frac{\beta m}{2}\right)\le\exp\!\left(\frac{\lambda m}{2}\right).
+\]
+The negative quadratic term is the term \(\beta\int t\,d\mu\) of \(\mathcal E_\beta\). The right side gives a linear term \((\lambda/2)m\). The cell rounding of the mean causes no other error.
+
+Combining \eqref{eq:real-cell}--\eqref{eq:riemann}, the energy expression for each tuple is bounded above by
+\begin{equation}\label{eq:energy-tuple}
+ -m^2\mathcal E_\beta(\mu)+\frac{15}{4}m\log m+
+ \left(2+9+\frac34+2+2\log5+\log32+\frac{\lambda}{2}\right)m.
+\end{equation}
+The coefficient of \(m\log m\) is the sum
+\[
+ \underbrace{4}_{\eqref{eq:moving-vdm}}
+ +\underbrace{1}_{\eqref{eq:fixed-vdm}}
+ +\underbrace{3/4}_{\eqref{eq:weight}}
+ -\underbrace{2}_{m^{-2m}}
+ =\frac{15}{4}.
+\]
+All \(m^2\log m\) terms cancel in this count. Here \(\mathcal E_\beta\) is \(\mathcal E_\lambda\) with \(\lambda\) replaced by \(\beta\), and \(A(\beta)=\inf_\mu \mathcal E_\beta(\mu)\). The term \(\lambda m/2\) is the bound on \(\exp(\beta m/2)\) above.
+
+It remains to sum the reserved factor over all tuples. The sum over all tuples, with no cutoff, satisfies
+\begin{equation}\label{eq:tail}
+ \frac{1}{m!}\sum_{\boldsymbol r}\exp(-\sum r_\ell/m)
+ \le \frac{1}{m!}\left(\frac{1}{e^{1/m}-1}\right)^m
+ \le \frac{m^m}{m!}\le e^m.
+\end{equation}
+After adding this \(e^m\) factor to \eqref{eq:energy-tuple}, the linear term before rounding is
+\[
+\left(\frac{15}{4}m\log m+\left(2+9+\frac34+2+2\log5+\log32+\frac{\lambda}{2}+1\right)m\right).
+\]
+The constant part after separating \(\lambda/2\) is below 22. We use the larger constant 23, which leaves room for rounding. Since \(15/4<4\), this yields \eqref{eq:determinant-bound}. Occupancy at most three is used in the real-cell error. The proof uses no cutoff and no positivity of the determinant. For negative \(a\), the alternating signs are discarded only after taking the absolute value of the full multiple sum. This proves Proposition~\ref{prop:analytic}.
+\end{proof}
+
+\begin{lemma}\label{lem:energy-properties}
+The function \(A\) is finite and concave on \((0,\infty)\), hence continuous. In particular \(A(\lambda-1/m)\to A(\lambda)\). Every density \(\mu\) in the energy domain satisfies
+\[
+ \int t\,d\mu(t)\ge 2/3,
+\]
+with equality for density \(3\,1_{[1/2,5/6]}\). For bounded zero-mass densities \(\rho\) with finite first moment, \(-L(\rho,\rho)\ge0\). Let \(\lambda>0\), and let \(\sigma\) be a compactly supported density in the energy domain. Put \(U^\sigma(t)=\int\log|t-s|\,d\sigma(s)\), \(V_\lambda(t)=B(t)-3h(t)+\lambda t\), and \(\Psi=V_\lambda-2U^\sigma\). Then for every real \(\Lambda\),
+\begin{equation}\label{eq:energy-cert}
+ A(\lambda)\ge\frac32+L(\sigma,\sigma)+\Lambda
+ -3\int_{1/2}^\infty(\Lambda-\Psi(t))_+\,dt.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let \(\beta>0\). The density \(3\,1_{[1/2,5/6]}\) is compactly supported and bounded. So its energy is finite, and \(A(\beta)<\infty\). For the lower bound, \(h(t)=\frac12\log2+\int_{t-1/2}^t(1+\log x)\,dx\le\frac12+\frac12\log(2t)\). Also \(B(t)\ge2\log t\), and \(\log|t-s|\le\log(1+t)+\log(1+s)\) for \(t,s\ge0\). Hence every \(\mu\) in the energy domain satisfies
+\[
+ \mathcal E_\beta(\mu)\ge\frac32+\int c_\beta\,d\mu,\qquad
+ c_\beta(t)=2\log t-\frac32-\frac32\log(2t)+\beta t-2\log(1+t).
+\]
+The function \(c_\beta\) is continuous on \([1/2,\infty)\) and \(c_\beta(t)\to\infty\) as \(t\to\infty\). So \(c_\beta\) is bounded below, and \(A(\beta)\ge\frac32+\inf_{t\ge1/2}c_\beta(t)>-\infty\). The energy \(L(\mu,\mu)\) converges absolutely by the diagonal estimate below. The domain is independent of \(\beta\), and \(\mathcal E_\beta\) is affine in \(\beta\). So \(A\) is concave. A finite concave function on the open interval is continuous.
+
+The mean bound is the bathtub inequality for the cap three. Let \(\Psi\) be measurable, \(\Lambda\in\mathbb R\), and \(0\le f\le3\) with \(\int f=1\). Then
+\begin{equation}\label{eq:bathtub}
+ \int\Psi f\ge \Lambda-3\int_{1/2}^\infty(\Lambda-\Psi)_+\,dt.
+\end{equation}
+Pointwise \((\Psi-\Lambda)f\ge-3(\Lambda-\Psi)_+\). Integrate and use \(\int f=1\). With \(\Psi(t)=t\) and \(\Lambda=5/6\), \eqref{eq:bathtub} gives \(\int t\,d\mu\ge5/6-3\int_{1/2}^{5/6}(5/6-t)\,dt=2/3\). The density \(3\,1_{[1/2,5/6]}\) attains this value.
+
+Now let \(d\rho(t)=v(t)\,dt\) be a bounded density on \([1/2,\infty)\) with \(\int v=0\) and \(\int(1+t)|v(t)|\,dt<\infty\). Its energy converges absolutely. On \(|t-s|<1\), boundedness of \(v\) gives
+\[
+ \iint_{|t-s|<1}|v(t)v(s)|\,|\log|t-s||\,dt\,ds
+ \le \|v\|_1\|v\|_\infty
+       \int_{-1}^{1}|\log|u||\,du<\infty.
+\]
+On \(|t-s|\ge1\), since \(t,s\ge1/2>0\),
+\[
+ 0\le\log|t-s|\le\log(1+t+s)\le t+s.
+\]
+This is integrable against \(|v(t)v(s)|\,dt\,ds\) by the first moment. Extend \(v\) by zero to \(\mathbb R\), and put \(\widehat v(u)=\int_{\mathbb R}e^{iut}v(t)\,dt\). Integrate the regularized cosine identity
+\[
+ \int_0^\infty e^{-\varepsilon u}
+ \frac{\cos(u d)-\cos u}{u}\,du
+ =\frac12\log\frac{1+\varepsilon^2}{d^2+\varepsilon^2},
+\]
+with \(d=x-y\), against \(v(x)v(y)\,dx\,dy\). For \(0<u\le1\) the interchange follows from \(|\cos(u(x-y))-\cos u|\le u(1+|x-y|)\) and the first moment. For \(u\ge1\) the exponential factor gives absolute integrability. Since \(\int v=0\), the constant term disappears. Hence
+\[
+ \int_0^\infty e^{-\varepsilon u}\frac{|\widehat v(u)|^2}{u}\,du
+ =-\frac12\iint\log\!\bigl((x-y)^2+\varepsilon^2\bigr)v(x)v(y)\,dx\,dy.
+\]
+The first-moment and zero-mass conditions give \(|\widehat v(u)|=O(u)\) at the origin. For \(0<\varepsilon\le1\) and \(x\ne y\),
+\[
+\left|\frac12\log\bigl((x-y)^2+\varepsilon^2\bigr)
+      -\log|x-y|\right|
+\le\frac12\log\left(1+\frac1{(x-y)^2}\right).
+\]
+The right side is integrable against \(|v(x)v(y)|\,dx\,dy\). It has only a logarithmic singularity on the diagonal and is bounded away from it. Dominated convergence on the right and monotone convergence on the nonnegative left give
+\[
+ -L(\rho,\rho)=
+ \int_0^\infty\frac{|\widehat v(u)|^2}{u}\,du\ge0.
+\]
+
+Put \(L(\mu_1,\mu_2)=\iint\log|t-s|\,d\mu_1(t)\,d\mu_2(s)\). Let \(\sigma\), \(U^\sigma\) and \(V_\lambda\) be as in the statement, and let \(\mu\) be in the energy domain. Then the density of \(\rho=\mu-\sigma\) is bounded, has zero mass and has finite first moment. The diagonal estimate above shows that \(L(\mu,\mu)\) converges absolutely. With the compact support of \(\sigma\), it also makes the mixed energy finite. So the zero-mass bound applies to \(\rho\). Expanding the quadratic term gives
+\[
+ \begin{aligned}
+ \mathcal E_\lambda(\mu)-\mathcal E_\lambda(\sigma)
+ &=\int V_\lambda\,d\rho-2L(\sigma,\rho)-L(\rho,\rho)\\
+ &=\int\bigl(V_\lambda-2U^\sigma\bigr)\,d(\mu-\sigma)-L(\rho,\rho).
+ \end{aligned}
+\]
+By \(-L(\rho,\rho)\ge0\),
+\begin{equation}\label{eq:energy-dual}
+ \mathcal E_\lambda(\mu)\ge \mathcal E_\lambda(\sigma)+\int \Psi\,d(\mu-\sigma),\qquad
+ \Psi=V_\lambda-2U^\sigma.
+\end{equation}
+Apply \eqref{eq:bathtub} to the \(\mu\)-integral. Since \(\mathcal E_\lambda(\sigma)-\int \Psi\,d\sigma=3/2+L(\sigma,\sigma)\), this gives \eqref{eq:energy-cert}. The level \(\Lambda\) is a chosen certificate level and need not be the exact Euler--Lagrange threshold. This proves Lemma~\ref{lem:energy-properties}.
+\end{proof}
+
+\section{Energy bounds}\label{sec:energy}
+
+\begin{proposition}\label{prop:energy}
+\[
+ A(\log 67)\ge 6.2732861583,
+ \qquad
+ A(\log 70)\ge 6.3100053850.
+\]
+\end{proposition}
+
+\begin{proof}
+Use a density \(\sigma\) constant on 256 cells of width \(1/128\) on \([1/2,5/2]\). Its exact density on cell \(i\) is
+\[
+ \sigma_i=\frac{n_{i,q}}{2^{40}},\qquad i=0,\ldots,255,
+\]
+where the full integer arrays \(n_{i,q}\) for \(q=67\) and \(q=70\) are printed in Appendix~\ref{app:cert}. For each \(q\), the exact checks are
+\[
+ \sum_{i=0}^{255} n_{i,q}=128\cdot2^{40},\qquad 0\le n_{i,q}\le3\cdot2^{40}.
+\]
+These are exactly the cap and mass conditions, and \(\sigma\) vanishes outside \([1/2,5/2]\). The reference levels are the exact rationals
+\[
+ \Lambda_{67}=3451654071/536870912,
+ \qquad
+ \Lambda_{70}=3477398357/536870912.
+\]
+The directed interval calculation applies Lemma~\ref{lem:energy-properties} to \(\mu-\sigma\). It uses \eqref{eq:energy-cert} with \(\lambda=\log q\) and \(\Lambda=\Lambda_q\). Each cell is split into \(256\) subcells of length \(2^{-15}\), and the bound is formed on each subcell. Let \(y_k\) be the cell walls where \(\sigma\) jumps, with jumps \(J_k\). With \(\chi_0(x)=x\log|x|-x\), we have \(U^\sigma(t)=\sum_k J_k\chi_0(t-y_k)\) and \(\chi_0''(x)=1/x\). This follows from \(\int_y^{y'}\log|t-s|\,ds=\chi_0(t-y)-\chi_0(t-y')\). Put \(\chi_1(x)=\frac12x^2\log|x|-\frac34x^2\), with \(\chi_1(0)=0\). Then \(\chi_1'=\chi_0\) and \(\chi_1''(x)=\log|x|\). Integrating twice over two cells at distance \(d=|i-k|\) gives
+\[
+ L(\sigma,\sigma)=\frac1{128^2}\sum_{i,k=0}^{255}\sigma_i\sigma_k
+ \bigl(-\log128+\chi_1(d+1)-2\chi_1(d)+\chi_1(d-1)\bigr).
+\] Also
+\[
+ V_\lambda(t)=(t+2)\log(t+2)-4t\log t+3(t-\tfrac12)\log(t-\tfrac12)+\lambda t-2-\tfrac32\log2 .
+\]
+On a subcell \([x_0,x_1]\) with midpoint \(\bar x\), no wall lies inside. Let \(\Psi_1\) collect the terms \((t+2)\log(t+2)\), \(3(t-\frac12)\log(t-\frac12)\), \(\lambda t\), the constant, and the terms \(-2J_k\chi_0(t-y_k)\) with \(J_k(t-y_k)<0\) on the subcell. Let \(\Psi_2\) collect \(-4t\log t\) and the remaining terms \(-2J_k\chi_0(t-y_k)\). Each term of \(\Psi_1\) is convex there, and each term of \(\Psi_2\) is concave. Then
+\[
+ \Psi(t)\ge \Psi_2(x_0)+\frac{\Psi_2(x_1)-\Psi_2(x_0)}{x_1-x_0}(t-x_0)+\Psi_1(\bar x)+\Psi_1'(\bar x)(t-\bar x)=:\underline \Psi(t).
+\]
+The chord inequality for \(\Psi_2\) and the midpoint tangent inequality for \(\Psi_1\) prove this bound. Hence \((\Lambda-\Psi)_+\le(\Lambda-\underline \Psi)_+\). Its integral is evaluated exactly from the two endpoint values of the affine function.
+
+The calculation also checks the monotone tail. For \(t\ge5/2\), the support of \(\sigma\) lies in \([1/2,5/2]\). Hence \(U^\sigma(t)\le\log(t-1/2)\). Since \(\Psi=V_\lambda-2U^\sigma\), this upper bound gives the lower bound
+\[
+ \Psi(t)\ge \varphi_\infty(t):=V_\lambda(t)-2\log(t-1/2).
+\]
+Here
+\[
+\begin{gathered}
+ B'(t)=\int_0^2\frac{ds}{t+s}=\log\frac{t+2}{t}>0,\\
+ h'(t)=\log\frac{t}{t-1/2}
+       =\log\left(1+\frac{1/2}{t-1/2}\right)
+       \le\frac{1/2}{t-1/2}.
+\end{gathered}
+\]
+Consequently
+\[
+ \varphi_\infty'(t)=B'(t)-3h'(t)+\lambda-\frac{2}{t-1/2}
+ \ge\lambda-\frac{7/2}{t-1/2}.
+\]
+The tail test checks \(\lambda(5/2-1/2)>7/2\). So \(\varphi_\infty\) is strictly increasing on \([5/2,\infty)\). It also checks \(\varphi_\infty(5/2)>\Lambda\). Then the tail part of the integral in \eqref{eq:energy-cert} is zero.
+
+The calculation uses the printed integers and the rational levels above. The outputs are rounded downward. Appendix~\ref{app:checks} records the interval conventions. This proves Proposition~\ref{prop:energy}.
+\end{proof}
+
+\begin{lemma}\label{lem:tau-endpoints}
+\[
+ \tau(67)<6.272107,\qquad \tau(-70)<6.307708.
+\]
+\end{lemma}
+
+\begin{proof}
+Here \(\tau\) is as in Proposition~\ref{prop:rate}. Both bounds follow from exact rational series enclosures of \(\log2\), \(\log5\), \(\log66\), \(\log67\), \(\log70\) and \(\log71\) (Appendix~\ref{app:checks}). For \(1\le x\le2\) and \(z=(x-1)/(x+1)\), the script uses the first 32 terms of \(\log x=2\sum_{k\ge0}z^{2k+1}/(2k+1)\) as a lower bound and adds \(2z^{65}/(65(1-z^2))\) for an upper bound. It applies this to \(x=2\), \(x=5/4\) and \(x=n/64\), with \(\log5=2\log2+\log(5/4)\) and \(\log n=6\log2+\log(n/64)\). Rounding outward to twelve decimals gives
+\[
+\begin{aligned}
+ 0.693147180559&\le\log2\le0.693147180560,\\
+ 1.609437912434&\le\log5\le1.609437912435,\\
+ 4.189654742026&\le\log66\le4.189654742027,\\
+ 4.204692619390&\le\log67\le4.204692619391,\\
+ 4.248495242049&\le\log70\le4.248495242050,\\
+ 4.262679877041&\le\log71\le4.262679877042.
+\end{aligned}
+\]
+Insert the upper bounds for \(\log2\), \(\log66\), \(\log71\) and the lower bounds for \(\log5\), \(\log67\), \(\log70\) into \(\tau(67)=S+\frac9{16}\log66-\frac18\log67\) and \(\tau(-70)=S+\frac9{16}\log71-\frac18\log70\). This gives \(\tau(67)<6.2721062\) and \(\tau(-70)<6.3077075\). No decimal approximation is used as input to the script. This proves Lemma~\ref{lem:tau-endpoints}.
+\end{proof}
+
+By Proposition~\ref{prop:energy} and Lemma~\ref{lem:tau-endpoints}, the endpoint margins \(A(\log|a|)-\tau(a)\) exceed \(0.0011791583\) and \(0.0022973850\), respectively.
+
+\section{Extension to both rays}\label{sec:rays}
+
+\begin{lemma}\label{lem:rays}
+For every integer \(a\ge67\) and every integer \(a\le-70\), \(\tau(a)<A(\log|a|)\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:energy-properties}, every density in the energy domain has mean at least \(2/3\). Thus, for \(\lambda_2\ge\lambda_1\),
+\[
+ A(\lambda_2)-A(\lambda_1)\ge\frac23(\lambda_2-\lambda_1).
+\]
+For \(q\ge67\) and \(q\ge70\), respectively,
+\[
+ \frac{d\tau_+(q)}{d\log q}=\frac7{16}+\frac9{16(q-1)}<\frac23,
+\quad
+ \frac{d\tau_-(q)}{d\log q}=\frac7{16}-\frac9{16(q+1)}<\frac23,
+\]
+where \(\tau_+(q)=S+(9/16)\log(q-1)-(1/8)\log q\) and \(\tau_-(q)=S+(9/16)\log(q+1)-(1/8)\log q\). So the endpoint margins of Section~\ref{sec:energy} persist for all \(a\ge67\) and all \(a\le-70\). This proves Lemma~\ref{lem:rays}.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+Fix an integer \(a\ge67\) or \(a\le-70\). Put \(\theta=\operatorname{Li}_3(1/a)\) and \(\eta=A(\log|a|)-\tau(a)\). By Lemma~\ref{lem:rays}, \(\eta>0\). Use the prime \(p\) of Section~\ref{sec:nonvanishing} and the sequence \(m_k=4p^k\).
+
+We check the hypotheses of Fact~\ref{fact:criterion} along \(m_k\). Propositions~\ref{prop:integerization} and~\ref{prop:rate} give the common denominator and its rate \(\tau(a)\). Proposition~\ref{prop:nonvanishing} gives the nonvanishing. By Lemma~\ref{lem:decomposition}, \(G_{m,a}(\theta)=\det M(a)\). By Lemma~\ref{lem:energy-properties}, \(A\) is continuous, so \(A(\log|a|-1/m)\ge A(\log|a|)-\eta/2\) for large \(m\). Then Proposition~\ref{prop:analytic} gives
+\[
+ \log|G_{m_k,a}(\theta)|\le-\alpha(a)m_k^2+O(m_k\log m_k),\qquad
+ \alpha(a)=\tau(a)+\eta/2>\tau(a).
+\]
+By Fact~\ref{fact:criterion}, \(\theta\) is irrational. Hence \(\operatorname{Li}_3(1/a)\) is irrational for every integer \(a\ge67\) and every integer \(a\le-70\).

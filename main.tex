@@ -1,0 +1,227 @@
+\documentclass{amsart}
+\usepackage{amssymb,mathtools,array,longtable,booktabs}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{3em}
+\raggedbottom
+\hypersetup{pdftitle={Irrationality of the trilogarithm at reciprocals of large integers},pdfauthor={Ruiyi Zhang}}
+
+\makeatletter
+\def\LT@makecaption#1#2#3{\LT@mcol\LT@cols c{\hbox to\z@{\hss
+  \parbox[t]\textwidth{\normalsize\@tempcnta=64 \@makecaption{#2}{#3}}\hss}}}
+\makeatother
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{fact}{Fact}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\Li}{\operatorname{Li}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Res}{\operatorname*{Res}}
+\newcommand{\needlines}[1]{\par\dimen0=\pagegoal\advance\dimen0-\pagetotal
+  \ifdim\dimen0<#1\baselineskip\newpage\fi}
+\makeatletter
+\newcommand{\captionof}[1]{\def\@captype{#1}\caption}
+\makeatother
+
+\begin{document}
+
+\title{Irrationality of the trilogarithm at reciprocals of large integers}
+\author{Ruiyi Zhang}
+\address{Independent Researcher, Columbia, Maryland, USA}
+\email{ryzfsu@gmail.com}
+\subjclass[2020]{Primary 11J72; Secondary 33B30}
+\keywords{trilogarithm, irrationality, determinant, logarithmic energy}
+
+\begin{abstract}
+We prove that $\operatorname{Li}_3(1/a)$ is irrational for every integer
+$a\ge67$ and every integer $a\le-70$. Earlier ranges are $|a|\ge1038$ (Hata), $a\ge1173$
+(Panzone), and $a\ge486$, $a\le-471$ (Marcovecchio). For $4\mid m$ we form
+an $m\times m$ determinant. Its entries are linear forms in $1$ and
+$\operatorname{Li}_3(1/a)$. The
+kernel has only triple poles, so no other polylogarithm enters. We bound a
+common denominator of the coefficients. The determinant does not vanish along a
+prime-power subsequence that depends on $a$. A logarithmic energy bounds
+its size. Exact density tables with directed rounding give the
+energy bounds at $a=67$ and $a=-70$. A slope comparison extends them to all
+$a\ge67$ and all $a\le-70$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $|z|<1$, define
+\[
+\operatorname{Li}_3(z)=\sum_{n\ge1}\frac{z^n}{n^3}.
+\]
+
+Hata \cite{Hata} constructed explicit rational approximations to
+polylogarithms at $1/q$. By Marcovecchio \cite[p.~229]{Marcovecchio},
+Hata's method \cite[Corollary~2.2]{Hata} gives the linear independence
+over $\mathbb Q$ of
+\[
+1,\ \operatorname{Li}_1(1/a),\ \operatorname{Li}_2(1/a),\
+\operatorname{Li}_3(1/a)
+\]
+for every integer $a$ with $|a|\ge1038$. Panzone
+\cite[Theorem~2, p.~108]{Panzone} gave a short proof that
+$\operatorname{Li}_3(1/d)$ is irrational for every integer $d\ge1173$. He
+attributes this result to Hata. Marcovecchio
+\cite[Theorem~7.1, p.~228; p.~229]{Marcovecchio} extended the linear
+independence to $a\ge486$ and $a\le-471$. In particular
+$\operatorname{Li}_3(1/a)$ is irrational in these ranges.
+
+\begin{theorem}\label{thm:main}
+For every integer $a\ge67$ and every integer $a\le-70$,
+$\operatorname{Li}_3(1/a)$ is irrational.
+\end{theorem}
+
+Theorem~\ref{thm:main} concerns $\operatorname{Li}_3(1/a)$ alone. In their
+ranges, the results of Hata and Marcovecchio give the stronger linear
+independence of four numbers.
+
+The method is the determinant method of \cite{Zh} for the dilogarithm,
+carried to weight three. We use only the determinant criterion of
+\cite[Section~3]{Zh}; Fact~\ref{fact:criterion} restates it with proof.
+The analytic estimate uses Andreief's identity~\cite{Andreief}, Cauchy's
+double alternant~\cite{Krattenthaler}, logarithmic
+energy~\cite{SaffTotik}, and the prime number theorem~\cite{Davenport}.
+
+Let $m$ be a positive multiple of $4$. Let $G_{m,a}(T)$ be the determinant polynomial of
+Section~\ref{sec:determinant}. Section~\ref{sec:integerization} gives a
+common denominator with limiting logarithmic rate $\tau(a)$, where
+\[
+S=\frac{643}{96}+4\log2-\frac{25}{8}\log5,
+\qquad
+\tau(a)=S+\frac9{16}\log|a-1|-\frac18\log|a|.
+\]
+Section~\ref{sec:nonvanishing} proves nonvanishing along $m=4p^k$, with one
+prime $p$ for each $a$. Section~\ref{sec:analytic} bounds the determinant
+by the energy function $A$. Section~\ref{sec:energy} proves
+\[
+\begin{gathered}
+A(\log67)\ge6.2732861583,\qquad \tau(67)<6.272107,\\
+A(\log70)\ge6.3100053850,\qquad \tau(-70)<6.307708,\\
+\max\{\tau(67)-A(\log67),\tau(-70)-A(\log70)\}<0.
+\end{gathered}
+\]
+These bounds give Theorem~\ref{thm:main} for $a=67$ and $a=-70$.
+Section~\ref{sec:rays} compares slopes in $\log|a|$ and extends the
+theorem to the full ranges.
+
+The proof uses a computer at three points. The energy bounds of
+Section~\ref{sec:energy} use exact rational and directed interval
+arithmetic. They act on the density tables printed in
+Appendix~\ref{app:cert}. The bounds for
+$\tau(67)$ and $\tau(-70)$ use exact rational series. The seed identity of
+Section~\ref{sec:nonvanishing} is an exact polynomial computation.
+Appendix~\ref{app:seed} prints its coefficients. Appendix~\ref{app:checks}
+lists these and the other exact checks. The use of AI tools is described
+at the end of the paper.
+
+\input{body.tex}
+\input{appendices.tex}
+
+\section{Computer checks}\label{app:checks}
+
+Table~\ref{tab:checks-clean} lists the scripts. They do the exact and
+directed-interval computations of the paper. They and
+their outputs accompany the paper as ancillary files. They run under Python~3.12.3. \texttt{cert.py} and
+\texttt{check\_energy.py} need python-flint~0.9.0, which provides the Arb
+interval arithmetic; the other scripts use only the standard library. The
+prime-power row checks the pole parts at $p=13$. This prime is admissible
+at $a=67$ and $a=-70$. It is not the prime chosen in
+Section~\ref{sec:nonvanishing}. Lemma~\ref{lem:one-carry} proves the pole
+finite parts. The proof uses neither of these two rows; they are diagnostic
+checks.
+
+For Proposition~\ref{prop:energy}, \texttt{cert.py} computes the
+certificate with 256 cells and 256 subcells per cell. The script
+\texttt{check\_energy.py} reads the tables of Appendix~\ref{app:cert} from
+the source of this paper. It then recomputes the bounds with the routine of
+\texttt{cert.py}. The subcells have length $1/(128\cdot256)$. On each subcell
+it splits $\Psi$ into the convex part $\Psi_1$ and the concave part $\Psi_2$
+of that proof. It evaluates $\Psi_2(x_0)$, $\Psi_2(x_1)$, $\Psi_1(\bar x)$ and
+$\Psi_1'(\bar x)$ as Arb balls. These give the two endpoint values of the affine minorant
+$\underline\Psi$ as balls. It takes the upper endpoints of
+$\Lambda-\underline\Psi(x_0)$ and $\Lambda-\underline\Psi(x_1)$. The
+positive part of an affine function has an exact integral in terms of its
+two endpoint values. This integral increases with them. The upper endpoints of
+these subcell contributions are summed, so the result bounds the
+positive-part integral from above.
+
+\begin{table}[!ht]
+\caption{Exact or directed-interval computations.}\label{tab:checks-clean}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\footnotesize\ttfamily}l>{\raggedright\arraybackslash}p{0.56\textwidth}@{}}
+\normalfont\small Script & Statement checked; result\\ \hline
+check\_energy.py & printed energy tables (routine of \texttt{cert.py}): 256 cells, 256 subcells per cell, at each endpoint; exact mass and cap; directed interval arithmetic. PASS, about 5 min.\\
+check\_seed.py & seed identity: exact $4\times4$ determinant over $\mathbb Q[a]$ gives $G_{4,a}(0)=H_0(a)/(2^{18}\cdot3^{9}\cdot5^{12}\cdot7^{4}(a-1)^4)$; printed Table~\ref{tab:seed-coefficients} and residues mod 13. PASS, exact, under 1 s.\\
+check\_tau.py & arithmetic rates: $\tau(67)<6.272107$ and $\tau(-70)<6.307708$. PASS, exact.\\
+check\_pole\_parts.py & pole finite parts: $m=4,8,\ldots,32$; 6,528 equalities. PASS, about 7 s. Diagnostic, not used in the proof.\\
+check\_tower.py & prime-power diagnostic: $p=13$, $Q=169$, $m=676$, at $a=67,-70$; pole parts only. PASS, about 5 s. Diagnostic, not used in the proof.
+\end{tabular}
+\end{table}
+
+\section*{Use of AI tools}
+
+The author devised the method of proof. Codex (OpenAI, GPT-5.6 Sol) wrote
+the Python code and the certificate tables. Claude Code (Anthropic, Claude
+Fable 5) checked the code, the parameters and the tables. The author checked
+every step of the proof, every table and every reference, and takes full
+responsibility for the content of the paper.
+
+\section*{Statements and declarations}
+
+\textbf{Competing interests.} The author has no competing interests.
+
+\textbf{Funding.} No funding was received for this work.
+
+\textbf{Data availability.} The scripts of Appendix~\ref{app:checks} and their
+outputs accompany the paper as ancillary files.
+
+\begin{thebibliography}{8}
+
+\bibitem{Andreief}
+C.~Andr\'eief, \emph{Note sur une relation entre les int\'egrales d\'efinies
+des produits des fonctions}, M\'em. Soc. Sci. Phys. Nat. Bordeaux (3)
+\textbf{2} (1886), 1--14.
+
+\bibitem{Davenport}
+H.~Davenport, \emph{Multiplicative Number Theory}, 3rd ed., revised by
+H.~L.~Montgomery, Graduate Texts in Mathematics, vol.~74, Springer, New
+York, 2000.
+
+\bibitem{Hata}
+M.~Hata, \emph{On the linear independence of the values of polylogarithmic
+functions}, J. Math. Pures Appl. (9) \textbf{69} (1990), no.~2, 133--173.
+
+\bibitem{Krattenthaler}
+C.~Krattenthaler, \emph{Advanced determinant calculus}, S\'em. Lothar.
+Combin. \textbf{42} (1999), Art.~B42q, 67~pp.
+
+\bibitem{Marcovecchio}
+R.~Marcovecchio, \emph{Linear independence of polylogarithms at algebraic
+points}, Mosc. J. Comb. Number Theory \textbf{6} (2016), no.~2--3, 208--232.
+
+\bibitem{Panzone}
+P.~A.~Panzone, \emph{A simple proof of the irrationality of the trilog},
+Rev. Un. Mat. Argentina \textbf{42} (2001), no.~2, 103--111.
+
+\bibitem{SaffTotik}
+E.~B.~Saff and V.~Totik, \emph{Logarithmic Potentials with External Fields},
+Grundlehren der mathematischen Wissenschaften, vol.~316, Springer, Berlin,
+1997, \url{https://doi.org/10.1007/978-3-662-03329-6}.
+
+\bibitem{Zh}
+R.~Zhang, \emph{Irrationality of the dilogarithm at reciprocals of
+integers}, preprint (2026), Zenodo,
+\url{https://doi.org/10.5281/zenodo.23296412}.
+
+\end{thebibliography}
+
+\end{document}
