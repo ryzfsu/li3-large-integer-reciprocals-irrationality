@@ -2,6 +2,8 @@
 
 Ruiyi Zhang
 
+DOI: [10.5281/zenodo.23329358](https://doi.org/10.5281/zenodo.23329358)
+
 The manuscript proves that `Li_3(1/a)` is irrational for every integer `a >= 67` and every
 integer `a <= -70`.
 
@@ -35,3 +37,19 @@ Run from `anc/`; the scripts read the tables from `../main.tex` and its input fi
     python3 check_tau.py
     python3 check_pole_parts.py  # diagnostic
     python3 check_tower.py       # diagnostic
+
+## Citation
+
+Ruiyi Zhang, *Irrationality of the trilogarithm at reciprocals of large integers*, preprint, Zenodo, 2026. https://doi.org/10.5281/zenodo.23329358
+
+```bibtex
+@misc{zhang2026li3reciprocals,
+  author    = {Zhang, Ruiyi},
+  title     = {Irrationality of the trilogarithm at reciprocals of large integers},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint},
+  doi       = {10.5281/zenodo.23329358},
+  url       = {https://doi.org/10.5281/zenodo.23329358}
+}
+```
